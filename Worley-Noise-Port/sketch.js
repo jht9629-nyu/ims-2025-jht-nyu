@@ -6,6 +6,8 @@
 
 let points = [];
 let layer;
+let frameIndex = 0;
+let frameDelta = 1;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -48,12 +50,18 @@ function updateLayer() {
   let w = layer.width;
   let h = layer.height;
   let ww = w * 1;
+  frameIndex += frameDelta;
+  if (frameIndex >= w || frameIndex < 0) {
+    frameDelta = frameDelta * -1;
+    frameIndex += frameDelta;
+  }
   for (let x = 0; x < w; x++) {
     for (let y = 0; y < h; y++) {
       let distances = [];
       for (let i = 0; i < points.length; i++) {
         let v = points[i];
-        let z = frameCount % ww;
+        let z = frameIndex;
+        // let z = frameCount % w;
         let d = dist(x, y, z, v.x, v.y, v.z);
         distances[i] = d;
       }
