@@ -1,7 +1,9 @@
-// https://editor.p5js.org/jht9629-nyu/sketches/BSRsNJ1nj
-// OpenSimplex Noise -- createGraphics
+// https://editor.p5js.org/jht9629-nyu/sketches/VDYJuuQ4B
+// OpenSimplex Noise -- fullScreen
 
 // What would this look like applied to video?
+
+// Why extra bar on the right?
 
 const increment = 0.03;
 // Just for non-looping demo
@@ -11,13 +13,16 @@ let noise;
 // adapted to use createGraphics
 let layer;
 
+let my = {};
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - 55);
   // I made the canvas really small because it's slow for me otherwise
   // createCanvas(200, 200);
   pixelDensity(1);
   initGraphics();
   noise = new OpenSimplexNoise(Date.now());
+  setup_fullScreenBtn();
 }
 
 function draw() {
@@ -52,6 +57,27 @@ function updateLayer() {
   zoff += increment;
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function setup_fullScreenBtn() {
+  my.fullScreenBtn = createButton('Full Screen');
+  my.fullScreenBtn.mousePressed(full_screen_action);
+  my.fullScreenBtn.style('font-size:42px');
+}
+
+function full_screen_action() {
+  my.fullScreenBtn.remove();
+  fullscreen(1);
+  let delay = 3000;
+  setTimeout(ui_present_window, delay);
+}
+
+function ui_present_window() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 // map(value, start1, stop1, start2, stop2, [withinBounds])
 
 // 4D Open Simplex Noise Loop
@@ -67,3 +93,9 @@ function updateLayer() {
 
 // https://editor.p5js.org/jht9629-nyu/sketches/O91vtOED4
 // Worley Noise frameIndex bounce
+
+// https://editor.p5js.org/p5name/sketches/TU9CrJ1di
+// ims noise class
+
+// https://editor.p5js.org/jht9629-nyu/sketches/BSRsNJ1nj
+// OpenSimplex Noise -- createGraphics
