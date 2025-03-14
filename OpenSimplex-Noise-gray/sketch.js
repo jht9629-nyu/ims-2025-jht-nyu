@@ -6,6 +6,7 @@
 // Why extra bar on the right?
 
 const increment = 0.03;
+const incrementZ = increment * 0.1;
 // Just for non-looping demo
 let zoff = 0;
 let noise;
@@ -26,6 +27,7 @@ function setup() {
 }
 
 function draw() {
+  ``;
   updateLayer();
   let w = layer.width;
   let h = layer.height;
@@ -54,7 +56,7 @@ function updateLayer() {
     }
     xoff += increment;
   }
-  zoff += increment;
+  zoff += incrementZ;
 }
 
 function windowResized() {
