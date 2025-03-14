@@ -1,7 +1,6 @@
-// https://editor.p5js.org/jht9629-nyu/sketches/CRYzNz14L
-// Worley Noise Port
+// https://editor.p5js.org/jht9629-nyu/sketches/O91vtOED4
+// Worley Noise frameIndex bounce
 
-// simple larger canvas is too slow.
 // adapted to use createGraphics
 
 let points = [];
@@ -89,3 +88,6 @@ function updateLayer() {
 
 // https://editor.p5js.org/jht9629-nyu/sketches/1fcRQkDrn
 // Cabana! - Worley Noise Port copy
+
+// https://editor.p5js.org/jht9629-nyu/sketches/CRYzNz14L
+// Worley Noise createGraphics
