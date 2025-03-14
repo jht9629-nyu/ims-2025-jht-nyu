@@ -1,4 +1,6 @@
-# ims-2025-jht
+# [ims-2025-jht](https://github.com/jht9629-nyu/ims-2025-jht.git)
 
-[ims_noise_inst](ims_noise_inst)
-[Worley-Noise-Port](Worley-Noise-Port)
+# [pages](https://jht9629-nyu.github.io/ims-2025-jht/)
+
+- [ims_noise_inst](ims_noise_inst)
+- [Worley-Noise-Port](Worley-Noise-Port)
