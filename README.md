@@ -3,5 +3,5 @@
 # [pages](https://jht9629-nyu.github.io/ims-2025-jht/)
 
 - [ims_noise_inst](ims_noise_inst)
-- [OpenSimplex-Noise-gray](OpenSimplex-Noise-gray)
+- [OpenSimplex-Noise](OpenSimplex-Noise)
 - [Worley-Noise-Port](Worley-Noise-Port)
