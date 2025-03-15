@@ -1,0 +1,21 @@
+name: Sync with p5 editor
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Sync introduction
+        uses: luisaph/p5editorsynch@main
+        with:
+          p5-username: ${{ secrets.P5_USERNAME }}
+          p5-password: ${{ secrets.P5_PASSWORD }}
+          sketch-folder: wk01-noise
+          collection-name: ims-wk01-noise
