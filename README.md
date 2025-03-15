@@ -2,6 +2,6 @@
 
 # [pages](https://jht9629-nyu.github.io/ims-2025-jht/)
 
-- [ims_noise_inst](wk01-noise/ims_noise_inst)
-- [OpenSimplex-Noise](wk01-noise/OpenSimplex-Noise)
-- [Worley-Noise-Port](wk01-noise/Worley-Noise-Port)
+- [ims_noise_inst](wk01-noise/ims_noise_inst?=v1)
+- [OpenSimplex-Noise](wk01-noise/OpenSimplex-Noise?=v1)
+- [Worley-Noise-Port](wk01-noise/Worley-Noise-Port?=v1)
