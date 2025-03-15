@@ -27,7 +27,6 @@ function setup() {
 }
 
 function draw() {
-  ``;
   updateLayer();
   let w = layer.width;
   let h = layer.height;
