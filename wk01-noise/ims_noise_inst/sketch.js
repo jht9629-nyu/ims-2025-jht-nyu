@@ -97,7 +97,7 @@ function windowResized() {
 }
 
 function setup_fullScreenBtn() {
-  my.fullScreenBtn = createButton('Full Screen');
+  my.fullScreenBtn = createButton('?=v5 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 }

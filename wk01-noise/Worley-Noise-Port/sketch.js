@@ -7,13 +7,15 @@ let points = [];
 let layer;
 let frameIndex = 0;
 let frameDelta = 1;
+let my = {};
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - 55);
   // createCanvas(100, 100);
   pixelDensity(1);
   initPoints();
   initGraphics();
+  setup_fullScreenBtn();
 }
 
 function initGraphics() {
@@ -66,14 +68,14 @@ function updateLayer() {
       }
       let sorted = sort(distances);
 
-      let r = map(sorted[0], 0, 150, 0, 255);
-      let g = map(sorted[1], 0, 50, 255, 0);
-      let b = map(sorted[2], 0, 200, 255, 0);
+      // let r = map(sorted[0], 0, 150, 0, 255);
+      // let g = map(sorted[1], 0, 50, 255, 0);
+      // let b = map(sorted[2], 0, 200, 255, 0);
 
       // bright heart
-      // let r = map(sorted[0], 0, 50, 0, 255);
-      // let g = map(sorted[1], 0, 50, 0, 255);
-      // let b = map(sorted[2], 0, 50, 0, 255);
+      let r = map(sorted[0], 0, 50, 0, 255);
+      let g = map(sorted[1], 0, 50, 0, 255);
+      let b = map(sorted[2], 0, 50, 0, 255);
 
       let index = (x + y * w) * 4;
       layer.pixels[index + 0] = r;
@@ -83,6 +85,28 @@ function updateLayer() {
     }
   }
   layer.updatePixels();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function setup_fullScreenBtn() {
+  my.fullScreenBtn = createButton('?=v5 Full Screen');
+  my.fullScreenBtn.mousePressed(full_screen_action);
+  my.fullScreenBtn.style('font-size:42px');
+}
+
+function full_screen_action() {
+  my.fullScreenBtn.remove();
+  fullscreen(1);
+  let delay = 3000;
+  setTimeout(ui_present_window, delay);
+}
+
+function ui_present_window() {
+  resizeCanvas(windowWidth, windowHeight);
+  // init_dim();
 }
 
 // https://editor.p5js.org/codingtrain/sketches/QsiCWVczZ
