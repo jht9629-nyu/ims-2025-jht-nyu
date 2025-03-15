@@ -1,4 +1,4 @@
-// https://editor.p5js.org/jht9629-nyu/sketches/VDYJuuQ4B
+// https://editor.p5js.org/jht9629-gmail/sketches/ScCMFzWqR
 // OpenSimplex Noise -- fullScreen
 
 // What would this look like applied to video?
@@ -63,7 +63,7 @@ function windowResized() {
 }
 
 function setup_fullScreenBtn() {
-  my.fullScreenBtn = createButton('?=v3 Full Screen');
+  my.fullScreenBtn = createButton('?=v4 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 }
@@ -100,3 +100,6 @@ function ui_present_window() {
 
 // https://editor.p5js.org/jht9629-nyu/sketches/BSRsNJ1nj
 // OpenSimplex Noise -- createGraphics
+
+// https://editor.p5js.org/jht9629-nyu/sketches/VDYJuuQ4B
+// OpenSimplex Noise -- fullScreen

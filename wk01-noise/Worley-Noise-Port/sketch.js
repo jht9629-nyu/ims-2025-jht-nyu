@@ -66,14 +66,14 @@ function updateLayer() {
       }
       let sorted = sort(distances);
 
-      // let r = map(sorted[0], 0, 150, 0, 255);
-      // let g = map(sorted[1], 0, 50, 255, 0);
-      // let b = map(sorted[2], 0, 200, 255, 0);
+      let r = map(sorted[0], 0, 150, 0, 255);
+      let g = map(sorted[1], 0, 50, 255, 0);
+      let b = map(sorted[2], 0, 200, 255, 0);
 
       // bright heart
-      let r = map(sorted[0], 0, 50, 0, 255);
-      let g = map(sorted[1], 0, 50, 0, 255);
-      let b = map(sorted[2], 0, 50, 0, 255);
+      // let r = map(sorted[0], 0, 50, 0, 255);
+      // let g = map(sorted[1], 0, 50, 0, 255);
+      // let b = map(sorted[2], 0, 50, 0, 255);
 
       let index = (x + y * w) * 4;
       layer.pixels[index + 0] = r;
