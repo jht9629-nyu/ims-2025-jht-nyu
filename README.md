@@ -14,4 +14,5 @@
 
 - [ims01-Vi](wk02/ims01-Vi)
 - [moire_shader_3](wk02/moire_shader_3)
+- [portals_by_oliviaemlee_v0](wk02/portals_by_oliviaemlee_v0)
 - [Unexpected-cut](wk02/Unexpected-cut)
