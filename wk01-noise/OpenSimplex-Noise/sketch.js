@@ -6,7 +6,8 @@
 // Why extra bar on the right?
 
 const increment = 0.03;
-const incrementZ = increment * 0.1;
+const incrementZ = increment * 0.15;
+// const incrementZ = increment * 1; // fast
 // Just for non-looping demo
 let zoff = 0;
 let noise;
@@ -63,7 +64,7 @@ function windowResized() {
 }
 
 function setup_fullScreenBtn() {
-  my.fullScreenBtn = createButton('?=v7 Full Screen');
+  my.fullScreenBtn = createButton('?v=10 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 }
