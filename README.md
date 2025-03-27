@@ -1,6 +1,6 @@
 # [ims-2025-jht](https://github.com/jht9629-nyu/ims-2025-jht.git)
 
-# pages ?v=12
+# pages ?v=13
 
 <!-- # [pages](https://jht9629-nyu.github.io/ims-2025-jht/) ?=10 -->
 
@@ -16,3 +16,4 @@
 - [moire_shader_3](wk02/moire_shader_3)
 - [portals_by_oliviaemlee_v0](wk02/portals_by_oliviaemlee_v0)
 - [Unexpected-cut](wk02/Unexpected-cut)
+- [Unexpected-cut-mask](wk02/Unexpected-cut-mask)

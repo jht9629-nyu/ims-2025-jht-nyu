@@ -12,7 +12,7 @@ let segmentation;
 let personImage;
 
 let portals = [];
-let fishEye;
+let fishEye1;
 
 function preload() {
   let options = {
@@ -49,8 +49,6 @@ function initGraphics() {
   let w = video.width;
   let h = video.height;
   layer = createGraphics(w, h);
-  // layer.translate(w, 0);
-  // layer.scale(-1, 1);
   personImage = createImage(w, h);
   fishEye1 = createGraphics(w, h);
 }
@@ -91,6 +89,7 @@ function framesPerSecond() {
 }
 // https://p5js.org/reference/p5.Image/mask/
 
+// image(img, x, y, [width], [height])
 // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
 // function for copying pixels based on segmentation
@@ -160,7 +159,7 @@ function windowResized() {
 }
 
 function setup_fullScreenBtn() {
-  my.fullScreenBtn = createButton('?v=12 Full Screen');
+  my.fullScreenBtn = createButton('?v=13 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 
