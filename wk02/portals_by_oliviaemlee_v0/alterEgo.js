@@ -56,26 +56,40 @@ function initGraphics() {
 }
 
 function draw() {
-  if (!layer) return;
+  if (!layer || !segmentation) return;
 
   layer.background(0);
   let w = video.width;
   let h = video.height;
+  // layer.image(video, 0, 0, w, h);
+  //
+  // draw video image on black
+  // copyForegroundPixels(video, segmentation.mask, personImage);
+  // layer.image(personImage, 0, 0, w, h);
   layer.image(video, 0, 0, w, h);
-
+  layer.image(segmentation.mask, 0, 0, w, h);
+  //
+  // draw fishEye
   applyAnimatedFisheyeEffect(video, fishEye1, w / 2, h / 2);
-  if (segmentation) {
-    // copyForegroundPixels(video, segmentation.mask, personImage);
-    copyForegroundPixels(fishEye1, segmentation.mask, personImage);
-    // layer needs push/pop
-    layer.push();
-    layer.translate(w, 0);
-    layer.scale(-1, 1);
-    layer.image(personImage, 0, 0, w, h);
-    layer.pop();
-  }
+  copyForegroundPixels(fishEye1, segmentation.mask, personImage);
+  // layer needs push/pop
+  layer.push();
+  layer.translate(w, 0);
+  layer.scale(-1, 1);
+  layer.image(personImage, 0, 0, w, h);
+  layer.pop();
+
   image(layer, 0, 0, width, height, 0, 0, w, h);
+
+  if (my.fpsSpan) {
+    my.fpsSpan.html(framesPerSecond());
+  }
 }
+
+function framesPerSecond() {
+  return frameRate().toFixed(2);
+}
+// https://p5js.org/reference/p5.Image/mask/
 
 // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
@@ -149,10 +163,14 @@ function setup_fullScreenBtn() {
   my.fullScreenBtn = createButton('?v=12 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
+
+  my.fpsSpan = createSpan('');
+  my.fpsSpan.style('font-size:42px');
 }
 
 function full_screen_action() {
   my.fullScreenBtn.remove();
+  my.fpsSpan.remove();
   fullscreen(1);
   let delay = 3000;
   setTimeout(ui_present_window, delay);
