@@ -1,19 +1,20 @@
 // https://editor.p5js.org/jht9629-nyu/sketches/1nLfUa1PU
 // portals by oliviaemlee v0
 
+// https://docs.ml5js.org/#/reference/body-segmentation
+
 let bodySegmentation;
 let video;
 let segmentation;
 let personImage;
 
-let options = {
-  maskType: 'person',
-};
-
 let portals = [];
 let fishEye;
 
 function preload() {
+  let options = {
+    maskType: 'person',
+  };
   bodySegmentation = ml5.bodySegmentation('BodyPix', options);
 }
 
@@ -25,12 +26,17 @@ function setup() {
   video.size(640, 480);
   video.hide();
 
-  bodySegmentation.detectStart(video, gotResults);
+  bodySegmentation.detectStart(video, gotSegmentationResults);
 
   personImage = createImage(video.width, video.height);
   fishEye1 = createGraphics(video.width, video.height);
 
   frameRate(30);
+}
+
+// Callback for body segmentation
+function gotSegmentationResults(result) {
+  segmentation = result;
 }
 
 function draw() {
@@ -67,11 +73,6 @@ function copyForegroundPixels(imgSource, imgMask, imgResult) {
     }
   }
   imgResult.updatePixels();
-}
-
-// Callback for body segmentation
-function gotResults(result) {
-  segmentation = result;
 }
 
 // Animated Fisheye Effect
