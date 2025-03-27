@@ -3,6 +3,9 @@
 
 // https://docs.ml5js.org/#/reference/body-segmentation
 
+let my = {};
+let layer;
+
 let bodySegmentation;
 let video;
 let segmentation;
@@ -19,19 +22,21 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(windowWidth, windowHeight);
   pixelDensity(1);
 
-  video = createCapture(VIDEO);
-  video.size(640, 480);
+  video = createCapture(VIDEO, capture_ready_callback);
+  // video.size(640, 480);
   video.hide();
 
   bodySegmentation.detectStart(video, gotSegmentationResults);
+  // frameRate(30);
 
-  personImage = createImage(video.width, video.height);
-  fishEye1 = createGraphics(video.width, video.height);
+  setup_fullScreenBtn();
+}
 
-  frameRate(30);
+function capture_ready_callback() {
+  initGraphics();
 }
 
 // Callback for body segmentation
@@ -39,20 +44,40 @@ function gotSegmentationResults(result) {
   segmentation = result;
 }
 
-function draw() {
-  background(0);
+function initGraphics() {
+  console.log('initGraphics width', video.width, video.height);
+  let w = video.width;
+  let h = video.height;
+  layer = createGraphics(w, h);
+  // layer.translate(w, 0);
+  // layer.scale(-1, 1);
+  personImage = createImage(w, h);
+  fishEye1 = createGraphics(w, h);
+}
 
-  applyAnimatedFisheyeEffect(video, fishEye1, width / 2, height / 2);
-  image(video, 0, 0, width, height);
-  // image(fishEye1, 0, 0, width, height);
+function draw() {
+  if (!layer) return;
+
+  layer.background(0);
+  let w = video.width;
+  let h = video.height;
+  layer.image(video, 0, 0, w, h);
+
+  applyAnimatedFisheyeEffect(video, fishEye1, w / 2, h / 2);
   if (segmentation) {
     // copyForegroundPixels(video, segmentation.mask, personImage);
     copyForegroundPixels(fishEye1, segmentation.mask, personImage);
-    translate(width, 0);
-    scale(-1, 1);
-    image(personImage, 0, 0, width, height);
+    // layer needs push/pop
+    layer.push();
+    layer.translate(w, 0);
+    layer.scale(-1, 1);
+    layer.image(personImage, 0, 0, w, h);
+    layer.pop();
   }
+  image(layer, 0, 0, width, height, 0, 0, w, h);
 }
+
+// image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
 // function for copying pixels based on segmentation
 function copyForegroundPixels(imgSource, imgMask, imgResult) {
@@ -115,8 +140,34 @@ function applyAnimatedFisheyeEffect(input, output, centerX, centerY) {
   output.updatePixels();
 }
 
+// --
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function setup_fullScreenBtn() {
+  my.fullScreenBtn = createButton('?v=12 Full Screen');
+  my.fullScreenBtn.mousePressed(full_screen_action);
+  my.fullScreenBtn.style('font-size:42px');
+}
+
+function full_screen_action() {
+  my.fullScreenBtn.remove();
+  fullscreen(1);
+  let delay = 3000;
+  setTimeout(ui_present_window, delay);
+}
+
+function ui_present_window() {
+  resizeCanvas(windowWidth, windowHeight);
+  // init_dim();
+}
+
 // Animated Fisheye Effect
 // https://editor.p5js.org/jeffThompson/sketches/amZAWPv9S
 
 // https://editor.p5js.org/oliviaemlee/sketches/CDwTbFgAL
 // portals by oliviaemlee
+
+// frameRate()
+// 10.822510825303342
