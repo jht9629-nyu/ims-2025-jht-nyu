@@ -1,4 +1,4 @@
-# [ims-2025-jht](https://github.com/jht9629-nyu/ims-2025-jht.git)
+# [ims-2025-jht](https://github.com/jht9629-nyu/ims-2025-jht-nyu.git)
 
 # pages ?v=14
 
