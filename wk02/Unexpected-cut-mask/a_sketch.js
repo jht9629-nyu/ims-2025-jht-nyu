@@ -1,5 +1,5 @@
-// https://editor.p5js.org/jht9629-nyu/sketches/xxxx
-// Unexpected-cut-mask
+// https://editor.p5js.org/jht9629-nyu/sketches/v_diZAkZQ
+// ims02 Unexpected-cut-mask
 
 let my = {};
 let layer;
@@ -62,6 +62,8 @@ function initGraphics() {
 function draw() {
   if (!layer || !segmentation) return;
 
+  // background(255);
+
   render_layer();
 
   render_shader();
@@ -75,11 +77,11 @@ function draw() {
 
 function render_layer() {
   layer.background(0);
+  // layer.clear();
   let w = video.width;
   let h = video.height;
   layer.image(video, 0, 0, w, h);
   layer.image(segmentation.mask, 0, 0, w, h);
-  //
 }
 
 function render_shader() {
@@ -90,33 +92,42 @@ function render_shader() {
   camShader.setUniform('tex0', video);
   // console.log(cam)
   // also send the size of 1 texel on the screen
-  camShader.setUniform('texelSize', [2.5 / width, 2.5 / height]); // can play around with the ratio for cool effects like edge blurring (original 1.0 for both)
+  camShader.setUniform('texelSize', [2.5 / width, 2.5 / height]);
+  // can play around with the ratio for cool effects like edge blurring
+  // (original 1.0 for both)
 
   let w = layer.width;
   let h = layer.height;
 
   // shaderLayer.ellipse(0, 0, width, height);
   shaderLayer.rect(0, 0, w, h);
-
-  layer2.push();
-  layer2.translate(w, 0);
-  layer2.scale(-1, 1);
-  layer2.image(shaderLayer, 0, 0);
-  layer2.pop();
-
-  // layer.image(shaderLayer, 0, 0, w, h, 0, 0, w, h);
+  {
+    layer2.push();
+    layer2.translate(w, 0);
+    layer2.scale(-1, 1);
+    layer2.image(shaderLayer, 0, 0);
+    layer2.pop();
+  }
   layer2.image(segmentation.mask, 0, 0);
+  // layer2.mask(segmentation.mask);
 
   // layer.image(layer2, 0, 0);
-  layer.push();
-  layer.translate(w, 0);
-  layer.scale(-1, 1);
-  let img = layer2.get();
-  layer.blend(img, 0, 0, w, h, 0, 0, w, h, EXCLUSION);
-  // layer.image(layer2, 0, 0);
-  layer.pop();
+  {
+    layer.push();
+    layer.translate(w, 0);
+    layer.scale(-1, 1);
+    let img = layer2.get();
+    // img.mask(segmentation.mask);
+    layer.blendMode(EXCLUSION);
+    layer.image(img, 0, 0);
+    // layer.blend(img, 0, 0, w, h, 0, 0, w, h, EXCLUSION);
+    // layer.image(layer2, 0, 0);
+    layer.pop();
+  }
   // ADD SOFT_LIGHT OVERLAY DIFFERENCE EXCLUSION
 }
+
+// https://p5js.org/reference/p5/blendMode/
 
 // BLEND, DARKEST, LIGHTEST, DIFFERENCE, MULTIPLY, EXCLUSION, SCREEN, REPLACE,
 // OVERLAY, HARD_LIGHT, SOFT_LIGHT, DODGE, BURN, ADD or NORMAL
@@ -134,7 +145,7 @@ function windowResized() {
 }
 
 function setup_fullScreenBtn() {
-  my.fullScreenBtn = createButton('?v=13 Full Screen');
+  my.fullScreenBtn = createButton('?v=14 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 

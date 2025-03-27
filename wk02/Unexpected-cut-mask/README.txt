@@ -7,7 +7,6 @@
 - ml5 body-segmentation used to isolate image
 - full screen button
 - framesPerSecond() reported using html span
-- uploaded to p5js editor
 
 # p5.js Shader Example
 
