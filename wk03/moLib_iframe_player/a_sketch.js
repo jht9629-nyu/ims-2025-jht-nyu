@@ -4,32 +4,28 @@
 // my.items is play list of p5js sketches
 // which are played in sequence
 // switching every my.perSlideSecs seconds
-// moLibrary is used to save my.item_index in firebase realtime database
-
-// sketches harvested from
-// https://github.com/molab-itp/p5mirror/forks
 
 let my = {};
+my.items = [
+  'https://jiaying0412.github.io/p5mirror---jiaying0822/p5projects/ims01-Jiaz-jYTEhmWCm/',
+  'https://jht9629-gmail.github.io/ims-2025-jht/wk01-noise/ims_noise_inst/',
+  'https://jht9629-gmail.github.io/ims-2025-jht/wk01-noise/OpenSimplex-Noise/',
+  'https://jht9629-gmail.github.io/ims-2025-jht/wk01-noise/Worley-Noise-Port/',
+  'https://jht9629-gmail.github.io/ims-2025-jht/wk02/ims01-Vi/',
+  // !!@ Takes a long time to load
+  'https://jht9629-gmail.github.io/ims-2025-jht/wk02/moire_shader_3/',
+  // !!@ camera access NOT permitted in iframes
+  // 'https://jht9629-gmail.github.io/ims-2025-jht/wk02/portals_by_oliviaemlee_v0/',
+  // 'https://jht9629-gmail.github.io/ims-2025-jht/wk02/Unexpected-cut/',
+  // 'https://jht9629-gmail.github.io/ims-2025-jht/wk02/Unexpected-cut-mask/',
+];
 
 function my_setup() {
-  my.width = windowWidth;
-  my.height = windowHeight;
-
-  my.perSlideSecs = 10;
+  //
+  my.perSlideSecs = 30;
   my.perSlideTime = millis();
 
   my.item_index = 0;
-  my.items = [];
-  my.items.push('https://molab-itp.github.io/p5moExamples/examples/lobby/?v=55&room=room0');
-  my.items.push(
-    'https://leey611.github.io/p5mirror-leey611/p5projects/Bezier%20Curve%20Interactive%20Tangents%20copy-ZfRGzFyhK/'
-  );
-  my.items.push('https://karakkzzk.github.io/p5mirror-karakkzzk/p5projects/Innovative%20crafter-OcjJ4foZE/');
-  my.items.push('https://paulineium.github.io/p5mirror-pk2196/p5projects/ims01-paulineium-CHGZXqDjz/');
-  my.items.push('https://jiaying0412.github.io/p5mirror---jiaying0822/p5projects/ims01-Jiaz-jYTEhmWCm/');
-  my.items.push(
-    'https://newbenjaminb.github.io/p5mirror-bb/p5projects/%20W6.4-1v4%20colliding%20balls%20DONE-VbVQXinn1/'
-  );
   my.iframe_src = my.items[my.item_index];
 
   setup_dbase();
@@ -42,8 +38,6 @@ function setup() {
 
   // my.canvas = createCanvas(my.width, my.height);
   noCanvas();
-
-  // dbase_app_init({ completed: startup_completed });
 
   createButton('Next').mousePressed(next_action);
   createButton('Previous').mousePressed(previous_action);
@@ -83,3 +77,9 @@ function windowResized() {
 
 // https://editor.p5js.org/jht9629-nyu/sketches/23h3z1G82
 // p5moExamples words 47
+// moLibrary is used to save my.item_index in firebase realtime database
+
+// <script type="module" src="https://unpkg.com/itp-molib@0.2.44/dist/moLib.esm.js"></script>
+
+// sketches harvested from
+// https://github.com/molab-itp/p5mirror/forks
