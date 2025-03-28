@@ -29,7 +29,8 @@ function setup() {
   pixelDensity(1);
 
   video = createCapture(VIDEO, { flipped: true }, capture_ready_callback);
-  // video.size(1920, 1080);
+  // video.size(windowWidth, windowHeight);
+  video.size(1920, 1080);
   // video.size(960, 540);
   video.hide();
 
