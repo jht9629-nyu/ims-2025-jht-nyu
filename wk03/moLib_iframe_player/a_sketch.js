@@ -22,7 +22,7 @@ my.items = [
 
 function my_setup() {
   //
-  my.perSlideSecs = 30;
+  my.perSlideSecs = 60;
   my.perSlideTime = millis();
 
   my.item_index = 0;
@@ -46,6 +46,8 @@ function setup() {
   my.item_index_span = createSpan(my.item_index);
   createSpan(' ');
   my.timer_span = createSpan('');
+  createSpan(' ');
+  my.url_span = createSpan('');
 
   // Move the iframe below all the ui elements
   let body_elt = document.querySelector('body');
@@ -69,6 +71,12 @@ function draw() {
     next_action();
   }
   my.timer_span.html(lapse.toFixed(1));
+  my.url_span.html(my.iframe_src);
+}
+
+function reset_timer() {
+  let now = millis();
+  my.perSlideTime = now;
 }
 
 function windowResized() {

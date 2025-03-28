@@ -39,6 +39,7 @@ function first_action() {
 }
 
 function next_action() {
+  reset_timer();
   let last = my.items.length - 1;
   if (my.item_index >= last) {
     my.dbase.update_item('item', { item_index: 0 });
@@ -50,6 +51,7 @@ function next_action() {
 }
 
 function previous_action() {
+  reset_timer();
   let last = my.items.length - 1;
   if (my.item_index <= 0) {
     my.dbase.update_item('item', { item_index: last });
