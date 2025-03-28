@@ -14,13 +14,6 @@ let my = {};
 function my_setup() {
   my.width = windowWidth;
   my.height = windowHeight;
-  my.fireb_config = 'jht9629';
-  // my.fireb_config = 'jht1493';
-  // my.fireb_config = 'jhtitp';
-  my.dbase_rootPath = 'm0-@r-@w-';
-  my.roomName = 'room1';
-  my.mo_app = 'mo-iframe_player';
-  my.nameDevice = '';
 
   my.perSlideSecs = 10;
   my.perSlideTime = millis();
@@ -38,6 +31,8 @@ function my_setup() {
     'https://newbenjaminb.github.io/p5mirror-bb/p5projects/%20W6.4-1v4%20colliding%20balls%20DONE-VbVQXinn1/'
   );
   my.iframe_src = my.items[my.item_index];
+
+  setup_dbase();
 }
 
 function setup() {
@@ -48,7 +43,7 @@ function setup() {
   // my.canvas = createCanvas(my.width, my.height);
   noCanvas();
 
-  dbase_app_init({ completed: startup_completed });
+  // dbase_app_init({ completed: startup_completed });
 
   createButton('Next').mousePressed(next_action);
   createButton('Previous').mousePressed(previous_action);
@@ -80,49 +75,6 @@ function draw() {
     next_action();
   }
   my.timer_span.html(lapse.toFixed(1));
-}
-
-function startup_completed() {
-  console.log('startup_completed');
-
-  dbase_devices_observe({ observed_item, all: 1 });
-
-  function observed_item(device) {
-    console.log('observed_item device', device);
-    if (device.item_index != undefined) {
-      my.item_index = device.item_index;
-      item_index_changed();
-    }
-  }
-}
-
-function item_index_changed() {
-  my.iframe_src = my.items[my.item_index];
-  my.iframe_element.elt.src = my.iframe_src;
-  my.iframe_element.elt.width = windowWidth;
-  my.iframe_element.elt.height = windowHeight;
-}
-
-function first_action() {
-  dbase_update_props({ item_index: 0 });
-}
-
-function next_action() {
-  let last = my.items.length - 1;
-  if (my.item_index >= last) {
-    dbase_update_props({ item_index: 0 });
-  } else {
-    dbase_update_props({ item_index: dbase_increment(1) });
-  }
-}
-
-function previous_action() {
-  let last = my.items.length - 1;
-  if (my.item_index <= 0) {
-    dbase_update_props({ item_index: last });
-  } else {
-    dbase_update_props({ item_index: dbase_increment(-1) });
-  }
 }
 
 function windowResized() {
