@@ -1,3 +1,6 @@
+// https://editor.p5js.org/jht9629-nyu/sketches/FMZ9qAfBr
+// sliding window v2 cut
+
 // https://editor.p5js.org/jht9629-nyu/sketches/KfpABTqxn
 // sliding window v1 responsive
 
@@ -22,7 +25,8 @@ let my = {};
 
 function preload() {
   handPose = ml5.handPose({ flipped: true, runtime: 'mediapipe' });
-  myShader = loadShader('shader.vert', 'shader.frag');
+  myShader = loadShader('shader.vert', 'shader-effect.frag');
+  // myShader = loadShader('shader.vert', 'shader.frag');
 }
 
 function setup() {
