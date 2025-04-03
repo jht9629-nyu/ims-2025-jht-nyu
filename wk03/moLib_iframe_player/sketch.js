@@ -10,6 +10,16 @@
 // https://github.com/molab-itp/p5mirror/forks
 
 let my = {};
+my.items = [
+  'https://otterott.github.io/ims-2025-HazelHe/Dizzy_Dizzy_/',
+  'https://imprankster.github.io/ims-2025-leo/week2/',
+  'https://link-wzz.github.io/ims-2025-Link/p5sketches/ms-1/',
+  'https://link-wzz.github.io/ims-2025-Link/p5sketches/Ripple-w01/',
+  'https://lukalkh.github.io/ims2025_Luka/ims02/',
+  'https://vdolan94.github.io/ims-2025-Vi/Week2sketch/',
+  'https://vvki21.github.io/ims2025-Vicky/ims-02-Vicky_2025_04_03_14_49_23/',
+  'https://vm2291.github.io/ims-2025-vlera/ims02-vlera/',
+];
 
 function my_setup() {
   my.width = windowWidth;
@@ -26,17 +36,17 @@ function my_setup() {
   my.perSlideTime = millis();
 
   my.item_index = 0;
-  my.items = [];
-  my.items.push('https://molab-itp.github.io/p5moExamples/examples/lobby/?v=55&room=room0');
-  my.items.push(
-    'https://leey611.github.io/p5mirror-leey611/p5projects/Bezier%20Curve%20Interactive%20Tangents%20copy-ZfRGzFyhK/'
-  );
-  my.items.push('https://karakkzzk.github.io/p5mirror-karakkzzk/p5projects/Innovative%20crafter-OcjJ4foZE/');
-  my.items.push('https://paulineium.github.io/p5mirror-pk2196/p5projects/ims01-paulineium-CHGZXqDjz/');
-  my.items.push('https://jiaying0412.github.io/p5mirror---jiaying0822/p5projects/ims01-Jiaz-jYTEhmWCm/');
-  my.items.push(
-    'https://newbenjaminb.github.io/p5mirror-bb/p5projects/%20W6.4-1v4%20colliding%20balls%20DONE-VbVQXinn1/'
-  );
+  // my.items = [];
+  // my.items.push('https://molab-itp.github.io/p5moExamples/examples/lobby/?v=55&room=room0');
+  // my.items.push(
+  //   'https://leey611.github.io/p5mirror-leey611/p5projects/Bezier%20Curve%20Interactive%20Tangents%20copy-ZfRGzFyhK/'
+  // );
+  // my.items.push('https://karakkzzk.github.io/p5mirror-karakkzzk/p5projects/Innovative%20crafter-OcjJ4foZE/');
+  // my.items.push('https://paulineium.github.io/p5mirror-pk2196/p5projects/ims01-paulineium-CHGZXqDjz/');
+  // my.items.push('https://jiaying0412.github.io/p5mirror---jiaying0822/p5projects/ims01-Jiaz-jYTEhmWCm/');
+  // my.items.push(
+  //   'https://newbenjaminb.github.io/p5mirror-bb/p5projects/%20W6.4-1v4%20colliding%20balls%20DONE-VbVQXinn1/'
+  // );
   my.iframe_src = my.items[my.item_index];
 }
 
