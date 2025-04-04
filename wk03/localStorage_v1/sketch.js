@@ -14,8 +14,8 @@ function setup() {
 
   let str = localStorage.getItem('urlParams');
   if (str) {
-    my.urlParamsFromStorage = JSON.parse(str);
-    console.log('my.urlParamsFromStorage', my.urlParamsFromStorage);
+    my.storageParams = JSON.parse(str);
+    console.log('my.storageParams', my.storageParams);
   }
 
   if (my.urlParams) {
@@ -32,20 +32,21 @@ function draw() {
   let params = my.urlParams;
   if (params) {
     str1 = 'url: ' + JSON.stringify(params, null, 2);
-    draw_params(params);
+    draw_params(params, 0);
   }
-  if (my.urlParamsFromStorage) {
-    str2 = 'storage: ' + JSON.stringify(my.urlParamsFromStorage, null, 2);
+  if (my.storageParams) {
+    str2 = 'storage: ' + JSON.stringify(my.storageParams, null, 2);
+    draw_params(my.storageParams, 50);
   }
   fill(0);
   textSize(height * 0.05);
   text(str1 + '\n' + str2, x, y);
 }
 
-function draw_params(params) {
+function draw_params(params, xoffset) {
   let c = params.c;
   let r = params.r * 0.01 * width;
-  let x = width * 0.5;
+  let x = width * 0.5 + xoffset;
   let y = height * 0.5;
   fill(c);
   circle(x, y, r);
