@@ -44,8 +44,9 @@ function draw() {
 }
 
 function draw_params(params, xoffset) {
-  let c = params.c;
-  let r = params.r * 0.01 * width;
+  let c = params.c || 'red';
+  let r = params.r || 50;
+  r = r * 0.01 * width;
   let x = width * 0.5 + xoffset;
   let y = height * 0.5;
   fill(c);
