@@ -70,8 +70,8 @@ function draw() {
   // camShader.setUniform('random', 4.0);
 
   // rect gives us some geometry on the screen
-  // rect(0, 0, width, height);
-  ellipse(0, 0, width, height);
+  rect(0, 0, width, height);
+  // ellipse(0, 0, width, height);
   // changing this to other shapes gives interesting outlines of the camera
   // why does chanigng the width and height not change the width and height of the camera and shape it is shown in?
 }

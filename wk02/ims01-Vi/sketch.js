@@ -4,14 +4,17 @@
 //the sketch makes circles that randomly moves around the space and changes size
 //if the distance between two circles are close enough, a vector will be made to connect them together
 
+let nmovers = 100;
+let maxLineLength = 150;
+
 let movers = [];
-let maxLineLength = 130;
-let colors = ["white", "#424547", "#9E9D9A", "#CAC7C7", "#373838"];
+let colors = ['white', '#424547', '#9E9D9A', '#CAC7C7', '#373838'];
 
 function setup() {
-  createCanvas(900, 900);
+  createCanvas(windowWidth, windowHeight);
+  // createCanvas(900, 900);
   strokeWeight(width * 0.001);
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < nmovers; i++) {
     movers.push(new Mover());
   }
 }
@@ -93,12 +96,7 @@ class Mover {
       this.targetX = this.currentX + random([-1, 1]) * width * random(0.3);
       this.targetY = this.currentY + random([-1, 1]) * width * random(0.3);
       this.targetD = random(0.001, 0.05) * width;
-    } while (
-      this.targetX < 0 ||
-      width < this.targetX ||
-      this.targetY < 0 ||
-      height < this.targetY
-    );
+    } while (this.targetX < 0 || width < this.targetX || this.targetY < 0 || height < this.targetY);
   }
 }
 

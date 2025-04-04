@@ -29,7 +29,8 @@ function setup() {
   pixelDensity(1);
 
   video = createCapture(VIDEO, { flipped: true }, capture_ready_callback);
-  // video.size(1920, 1080);
+  // video.size(windowWidth, windowHeight);
+  video.size(1920, 1080);
   // video.size(960, 540);
   video.hide();
 
@@ -85,6 +86,10 @@ function render_layer() {
 }
 
 function render_shader() {
+  //
+  let w = layer.width;
+  let h = layer.height;
+
   // shader() sets the active shader with our shader
   shaderLayer.shader(camShader);
 
@@ -92,12 +97,10 @@ function render_shader() {
   camShader.setUniform('tex0', video);
   // console.log(cam)
   // also send the size of 1 texel on the screen
-  camShader.setUniform('texelSize', [2.5 / width, 2.5 / height]);
+  // camShader.setUniform('texelSize', [2.5 / width, 2.5 / height]);
+  camShader.setUniform('texelSize', [2.5 / w, 2.5 / h]);
   // can play around with the ratio for cool effects like edge blurring
   // (original 1.0 for both)
-
-  let w = layer.width;
-  let h = layer.height;
 
   // shaderLayer.ellipse(0, 0, width, height);
   shaderLayer.rect(0, 0, w, h);
@@ -136,16 +139,17 @@ function render_shader() {
 // image(img, x, y, [width], [height])
 // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
+// --
 function framesPerSecond() {
   return frameRate().toFixed(2);
 }
-// --
+
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
 function setup_fullScreenBtn() {
-  my.fullScreenBtn = createButton('?v=14 Full Screen');
+  my.fullScreenBtn = createButton('?v=16 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 

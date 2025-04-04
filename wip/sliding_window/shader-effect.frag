@@ -8,11 +8,18 @@ uniform sampler2D tex0;
 uniform vec2 texelSize;
 //uniform float u_time;
 
+uniform float mouseX;
+uniform float window_left;
+uniform float window_right;
+
 void main() {
 
   vec2 uv = vTexCoord;
   // the texture is loaded upside down and backwards by default so lets flip it
   uv = 1.0 - uv;
+
+  // get the webcam as a vec4 using texture2D
+  vec4 texVideo = texture2D(tex0, uv);
 
   // a single pass blur works by sampling all the neighbor pixels and averaging them up
   // this is somewhat inefficient because we have to sample the texture 9 times -- texture2D calls are slow :(
@@ -44,5 +51,13 @@ void main() {
   tex += fract(tex) * 10.0;
   tex /= 10.0;
   
-  gl_FragColor = tex;
+    // using 1.0-uv.x for flipping
+  if (1.0-uv.x < window_left || 1.0-uv.x > window_right) {
+    // Outside the window
+    gl_FragColor = tex;
+  } else {
+    // Inside the window: use original texture color
+    gl_FragColor = texVideo;
+  }
+  // gl_FragColor = tex;
 }
