@@ -3,24 +3,25 @@
 
 let my = {};
 
+// url parameter for color items added to local storage array
+// ?c=blue&r=5
+// c = color
+// r = radius in percent of screen width 0 to 100
+
 function setup() {
   my.version = '?v=1';
 
-  my.canvas = createCanvas(windowWidth, windowHeight);
+  my.canvas = createCanvas(windowWidth, windowHeight - 80);
 
   my.urlParams = get_url_params();
 
   console.log('my.urlParams', my.urlParams);
 
-  let str = localStorage.getItem('urlParams');
+  let str = localStorage.getItem('storageParams');
   if (str) {
     my.storageParams = JSON.parse(str);
     console.log('my.storageParams', my.storageParams);
   }
-
-  // if (my.urlParams) {
-  //   save_params();
-  // }
 
   my.addButton = createButton('add');
   my.addButton.mousePressed(add_action);
@@ -77,15 +78,16 @@ function add_action() {
   }
 }
 
-function remove_action() {}
+function remove_action() {
+  if (my.storageParams) {
+    my.storageParams.splice(0, 1);
+    save_storageParams();
+  }
+}
 
 function save_storageParams() {
-  // if (!my.urlParams) {
-  //   console.log('no my.urlParams');
-  //   return;
-  // }
   let str = JSON.stringify(my.storageParams, null, 2);
-  localStorage.setItem('urlParams', str);
+  localStorage.setItem('storageParams', str);
 }
 
 // localStorage.clear();
