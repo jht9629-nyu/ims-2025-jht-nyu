@@ -26,8 +26,8 @@ function setup() {
   my.addButton = createButton('add');
   my.addButton.mousePressed(add_action);
 
-  my.addButton = createButton('remove');
-  my.addButton.mousePressed(remove_action);
+  my.removeButton = createButton('remove');
+  my.removeButton.mousePressed(remove_action);
 }
 
 function draw() {
