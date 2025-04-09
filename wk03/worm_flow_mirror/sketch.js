@@ -6,6 +6,8 @@ ns = 60; //noise scale for particle position
 nss = 150; //noise scale for time/animation
 ni = 8; // Noise intensity factor
 
+let bg;
+
 function setup() {
   cam = createCapture(VIDEO); //Initialize the webcam
   cam.hide(); //Hide the default video element
@@ -43,6 +45,9 @@ function draw() {
     spd = 5;
   }
 
+  if (bg) {
+    bg.remove();
+  }
   //Create a graphics buffer for the particle effect, it's a bit smaller than the camera's native size. This is because the particles are moving in orbit (controlled by the walk parameter) and need to have margins to prevent them from moving out of view.
   bg = createGraphics(w - walk * 2, h - walk * 2);
 
@@ -145,12 +150,7 @@ function windowResized() {
 
 // toggle fullscreen mode when the canvas is clicked
 function mousePressed() {
-  if (
-    mouseX > 0 &&
-    mouseX < windowWidth &&
-    mouseY > 0 &&
-    mouseY < windowHeight
-  ) {
+  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
     let fs = fullscreen();
     fullscreen(!fs);
   }
@@ -173,4 +173,3 @@ https://openprocessing.org/sketch/1521039
 https://openprocessing.org/sketch/771181
 
 */
-
