@@ -22,3 +22,5 @@
 
 - [wk03/faceMesh_mesh_nits](wk03/faceMesh_mesh_nits)
 - [wk03/moLib_iframe_player](wk03/moLib_iframe_player)
+- [wk03/p5moLibrary_DrawPoints](wk03/p5moLibrary_DrawPoints)
+- [wk03/worm_flow_mirror](wk03/worm_flow_mirror)
