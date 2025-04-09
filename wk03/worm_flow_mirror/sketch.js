@@ -1,5 +1,5 @@
-// https://editor.p5js.org/jht9629-nyu/sketches/jqtIfMAsE
-// ims_week1 v0 Xueyu333 floMirror
+// https://editor.p5js.org/jht9629-nyu/sketches/1MbhCPM60
+// ims_week1 v0 Xueyu333 floMirror fix
 
 let cam;
 ns = 60; //noise scale for particle position
@@ -173,3 +173,6 @@ https://openprocessing.org/sketch/1521039
 https://openprocessing.org/sketch/771181
 
 */
+
+// https://editor.p5js.org/jht9629-nyu/sketches/jqtIfMAsE
+// ims_week1 v0 Xueyu333 floMirror
