@@ -18,9 +18,15 @@ function setup() {
     console.log('my.storageParams', my.storageParams);
   }
 
-  if (my.urlParams) {
-    save_params();
-  }
+  // if (my.urlParams) {
+  //   save_params();
+  // }
+
+  my.addButton = createButton('add');
+  my.addButton.mousePressed(add_action);
+
+  my.addButton = createButton('remove');
+  my.addButton.mousePressed(remove_action);
 }
 
 function draw() {
@@ -36,11 +42,18 @@ function draw() {
   }
   if (my.storageParams) {
     str2 = 'storage: ' + JSON.stringify(my.storageParams, null, 2);
-    draw_params(my.storageParams, 50);
+    draw_params_array(my.storageParams);
   }
   fill(0);
   textSize(height * 0.05);
   text(str1 + '\n' + str2, x, y);
+}
+
+function draw_params_array(arr) {
+  for (let index = 0; index < arr.length; index++) {
+    let params = arr[index];
+    draw_params(params, (index + 1) * 50);
+  }
 }
 
 function draw_params(params, xoffset) {
@@ -53,12 +66,25 @@ function draw_params(params, xoffset) {
   circle(x, y, r);
 }
 
-function save_params() {
-  if (!my.urlParams) {
-    console.log('no my.urlParams');
-    return;
+function add_action() {
+  if (!my.storageParams) {
+    my.storageParams = [];
   }
-  let str = JSON.stringify(my.urlParams, null, 2);
+  let params = my.urlParams;
+  if (params) {
+    my.storageParams.push(params);
+    save_storageParams();
+  }
+}
+
+function remove_action() {}
+
+function save_storageParams() {
+  // if (!my.urlParams) {
+  //   console.log('no my.urlParams');
+  //   return;
+  // }
+  let str = JSON.stringify(my.storageParams, null, 2);
   localStorage.setItem('urlParams', str);
 }
 
