@@ -11,7 +11,7 @@ let my = {};
 function setup() {
   my.version = '?v=1';
 
-  my.canvas = createCanvas(windowWidth, windowHeight - 80);
+  my.canvas = createCanvas(windowWidth, windowHeight);
 
   my.urlParams = get_url_params();
 
@@ -25,9 +25,13 @@ function setup() {
 
   my.addButton = createButton('add');
   my.addButton.mousePressed(add_action);
+  my.addButton.style('font-size:42px');
+  my.addButton.position(width * 0.01, height * 0.01);
 
   my.removeButton = createButton('remove');
   my.removeButton.mousePressed(remove_action);
+  my.removeButton.style('font-size:42px');
+  my.removeButton.position(width * 0.1, height * 0.01);
 }
 
 function draw() {
