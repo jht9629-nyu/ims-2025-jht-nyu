@@ -45,6 +45,8 @@ function draw() {
     spd = 5;
   }
 
+  // createGraphics is own by the DOM tree
+  // much remove to avoid accumulation of canvas elements
   if (bg) {
     bg.remove();
   }
