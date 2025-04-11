@@ -46,11 +46,15 @@ function draw() {
   }
 
   // createGraphics is own by the DOM tree
-  // much remove to avoid accumulation of canvas elements
+  // must remove to avoid accumulation of canvas elements
   if (bg) {
     bg.remove();
   }
-  //Create a graphics buffer for the particle effect, it's a bit smaller than the camera's native size. This is because the particles are moving in orbit (controlled by the walk parameter) and need to have margins to prevent them from moving out of view.
+  // Create a graphics buffer for the particle effect,
+  // it's a bit smaller than the camera's native size.
+  // This is because the particles are moving in orbit
+  // (controlled by the walk parameter) and need to have margins
+  // to prevent them from moving out of view.
   bg = createGraphics(w - walk * 2, h - walk * 2);
 
   bg.noStroke(); // Draw particles without outlines
