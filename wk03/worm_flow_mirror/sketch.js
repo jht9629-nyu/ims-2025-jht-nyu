@@ -51,6 +51,7 @@ function draw() {
     bg.remove();
   }
   // Create a graphics buffer for the particle effect,
+
   // it's a bit smaller than the camera's native size.
   // This is because the particles are moving in orbit
   // (controlled by the walk parameter) and need to have margins
