@@ -85,9 +85,9 @@ function draw() {
     background(255);
   }
 
- if (millis() - flashStartTime > 10000 && !audio.isPlaying()) {
-   audio.play();
- }
+  if (millis() - flashStartTime > 10000 && !audio.isPlaying()) {
+    audio.play();
+  }
 
   drawFace();
   drawTopHat();
@@ -152,12 +152,12 @@ function growHandlebar(path, direction) {
 
   if (frameCount % 2 === 0) {
     let last = path[path.length - 1];
-    let angle = (direction < 0) ? (leftAngle += random(-18, 18)) : (rightAngle += random(-18, 18));
+    let angle = direction < 0 ? (leftAngle += random(-18, 18)) : (rightAngle += random(-18, 18));
     let step = p5.Vector.fromAngle(radians(angle));
     step.setMag(growthSpeed);
     let newPos = p5.Vector.add(last.pos, step);
 
-    // mic volume to stroke weight. 
+    // mic volume to stroke weight.
     // used gemini for insight on how
     // to connect mic input to stroke width w its parameters
     let vol = mic.getLevel();
