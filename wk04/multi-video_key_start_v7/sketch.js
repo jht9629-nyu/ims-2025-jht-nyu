@@ -12,7 +12,7 @@ my.videoRootPath = 'https://p5videokit.github.io/ims03-olivia-GirlTime/images';
 let nvideos = 12;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight - 80);
+  createCanvas(windowWidth, windowHeight - 60);
   my.videoIndex = 0;
   my.videos = [];
   my.videoPaths = [];
@@ -108,12 +108,16 @@ function stop_video_atIndex(index) {
   my.videoTileShow[index] = false;
 }
 
-function mousePressed() {
+// disabled for my.nextButton
+// function mousePressed() {
+function my_mousePressed() {
   if (!my.mouseWasPressed) {
     // first mouse press - loop all the videos
     my.videos.forEach((vid) => vid.loop());
+    console.log('first presss my.videoIndex', my.videoIndex);
+    my.mouseWasPressed = true;
+    return;
   }
-  my.mouseWasPressed = true;
   next_video();
 }
 
@@ -129,8 +133,8 @@ function secs() {
 }
 
 function create_ui() {
-  my.nextButton = createButton('?v=18 next');
-  my.nextButton.mousePressed(next_video);
+  my.nextButton = createButton('?v=19 next');
+  my.nextButton.mousePressed(my_mousePressed);
   my.nextButton.style('font-size:42px');
 }
 /*
