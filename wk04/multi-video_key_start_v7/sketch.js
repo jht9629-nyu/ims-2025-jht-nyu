@@ -8,7 +8,7 @@
 // console.log must be used sparingly, affects performance
 
 let my = {};
-my.videoRootPath = "https://p5videokit.github.io/ims03-olivia-GirlTime/images";
+my.videoRootPath = 'https://p5videokit.github.io/ims03-olivia-GirlTime/images';
 let nvideos = 12;
 
 function setup() {
@@ -18,7 +18,8 @@ function setup() {
   my.videoPaths = [];
   my.videoTileShow = [];
   my.videoWaitingCount = nvideos;
-  console.log("setup", millis() / 1000.0);
+  console.log('setup', secs());
+  // console.time('setup_video');
   for (let num = 1; num <= nvideos; num++) {
     setup_video_num(num);
   }
@@ -28,10 +29,12 @@ function setup_video_num(num) {
   let path = `${my.videoRootPath}/${num}.mov`;
   // console.log('path', path);
   let vid = createVideo(path, () => {
+    console.log('setup_video_num videoWaitingCount', my.videoWaitingCount);
     my.videoWaitingCount--;
     if (my.videoWaitingCount == 0) {
       my.videoReady = true;
-      console.log("setup_video_index videoReady", millis() / 1000.0);
+      console.log('setup_video_num videoReady', secs());
+      // console.timeEnd('setup_video');
     }
   });
   vid.hide();
@@ -76,8 +79,8 @@ function draw_video_tiles() {
 
 // keys to start/stop video 1,2 | 3,4 | 5,6 | 7,8 | 9,0 | -,=
 //
-let startKeys = ["1", "3", "5", "7", "9", "-"];
-let stoppKeys = ["2", "4", "6", "8", "0", "="];
+let startKeys = ['1', '3', '5', '7', '9', '-'];
+let stoppKeys = ['2', '4', '6', '8', '0', '='];
 //
 // startKeys.includes('1')
 // startKeys.indexOf('1')
@@ -85,12 +88,12 @@ let stoppKeys = ["2", "4", "6", "8", "0", "="];
 function keyPressed() {
   let index;
   index = startKeys.indexOf(key);
-  console.log("keyPressed startKey index", index);
+  console.log('keyPressed startKey index', index);
   if (index >= 0) {
     start_video_atIndex(index);
   }
   index = stoppKeys.indexOf(key);
-  console.log("keyPressed stoppKeys index", index);
+  console.log('keyPressed stoppKeys index', index);
   if (index >= 0) {
     stop_video_atIndex(index);
   }
@@ -115,14 +118,17 @@ function mousePressed() {
 
 function next_video() {
   my.videoIndex = (my.videoIndex + 1) % my.videos.length;
-  console.log("next_video my.videoIndex", my.videoIndex);
+  console.log('next_video my.videoIndex', my.videoIndex);
   let path = my.videoPaths[my.videoIndex];
   // console.log('next_video path', path);
 }
 
-/*
+function secs() {
+  return (millis() / 1000.0).toFixed(3);
+}
 
-Always plays first video??
+/*
+https://developer.mozilla.org/en-US/docs/Web/API/console/time_static
 
 https://github.com/p5videoKit/ims03-olivia-GirlTime
 >> Fork of https://github.com/olivia-em/GirlTime
@@ -141,7 +147,6 @@ https://p5js.org/reference/p5/createVideo/
 createVideo(src, [callback]) 
 src   - String|String[]: path to a video file, or an array of paths for supporting different browsers.
 callback - Function: function to call once the video is ready to play.
-
 */
 
 // https://editor.p5js.org/jht9629-nyu/sketches/X7LY4-mHp
