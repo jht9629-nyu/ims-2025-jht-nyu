@@ -3,7 +3,7 @@
 
 // keys to start/stop video 1,2 | 3,4 | 5,6 | 7,8 | 9,0 | -,=
 // 6 videos are layout in top quarter of canvas
-// mouse press to show next 1 of 12 videos
+// space key OR mouse press to show next 1 of 12 videos
 // video is displayed centered in the window
 // console.log must be used sparingly, affects performance
 
@@ -98,6 +98,9 @@ function keyPressed() {
   if (index >= 0) {
     stop_video_atIndex(index);
   }
+  if (key == ' ') {
+    my_mousePressed();
+  }
 }
 
 function start_video_atIndex(index) {
@@ -133,7 +136,7 @@ function secs() {
 }
 
 function create_ui() {
-  my.nextButton = createButton('?v=19 next');
+  my.nextButton = createButton('?v=20 next');
   my.nextButton.mousePressed(my_mousePressed);
   my.nextButton.style('font-size:42px');
 }
