@@ -29,34 +29,47 @@ class eff_simplex {
     this.layer = createGraphics(w, h);
     let { width, height } = this.input;
     console.log('eff_worley initGraphics width, height', width, height);
-    this.output = createImage(width, height);
-    // this.output = createGraphics(width, height);
+    // this.output = createImage(width, height);
+    this.layer2 = createGraphics(width, height);
+    this.output = createGraphics(width, height);
     // console.log('eff_worley initGraphics width, height', width, height);
   }
 
   prepareOutput() {
     // console.log('eff_example prepareOutput text_prop', this.text_prop);
-    let { layer, output } = this;
+    let { layer, layer2, output } = this;
     this.updateLayer(layer);
-    // Compute mask based on existing gray levels
-    layer.loadPixels();
-    let pixels = layer.pixels;
-    for (let index = pixels; index < pixels.length; index += 4) {
-      pixels[index + 3] = pixels[index];
+
+    // layer2 = Scale up low rez noise image to input rez
+    let sw = this.layer.width;
+    let sh = this.layer.height;
+    let dw = layer2.width;
+    let dh = layer2.height;
+    layer2.image(layer, 0, 0, dw, dh, 0, 0, sw, sh);
+
+    let srcImage = this.input.get();
+    srcImage.loadPixels();
+    layer2.loadPixels();
+    output.background(0);
+    output.loadPixels();
+    console.log('layer2.pixels.length', layer2.pixels.length);
+    for (let index = 0; index < layer2.pixels.length; index += 4) {
+      let srcPix = layer2.pixels[index];
+      // console.log('', index, srcPix);
+      // if (srcPix) {
+      output.pixels[index] = srcImage.pixels[index];
+      output.pixels[index + 1] = srcImage.pixels[index + 1];
+      output.pixels[index + 2] = srcImage.pixels[index + 2];
+      // console.log('', output.pixels[index], output.pixels[index + 1], output.pixels[index + 2]);
+      // }
     }
-    layer.updatePixels();
-    let sw = this.input.width;
-    let sh = this.input.height;
-    let img = this.input.get();
-    output.copy(img, 0, 0, sw, sh, 0, 0, sw, sh);
-    output.mask(layer);
-    // output.image(this.input, 0, 0);
-    // let sw = this.layer.width;
-    // let sh = this.layer.height;
-    // let dw = this.output.width;
-    // let dh = this.output.height;
-    // this.output.blend(this.layer, 0, 0, sw, sh, 0, 0, dw, dh, REPLACE);
+    // output.updatePixels();
+
+    output.image(layer2, 0, 0);
+    // output.image(srcImage, 0, 0);
   }
+
+  // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
   // copy(srcImage, sx, sy, sw, sh, dx, dy, dw, dh)
 
