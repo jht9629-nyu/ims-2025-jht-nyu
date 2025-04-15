@@ -8,7 +8,7 @@ class eff_simplex {
     { prop: 'uwidth', label: 'width', selection: [100, 200, 300] },
     // { prop: 'uheight', label: 'height', selection: [60, 100, 200, 300] },
     { prop: 'uspeed', label: 'speed', selection: [1, 0.05, 0.1, 0.2, 0.5, 1, 2, 4, 10] },
-    { prop: 'umix', label: 'mix', selection: [0.5, 0.1, 0.2, 0.5, 0.6, 0.8] },
+    { prop: 'umix', label: 'mix', selection: [0.5, 0.1, 0.2, 0.5, 0.6, 0.7, 0.8, 0.9] },
   ];
 
   // new eff_example({message_prop1, num_prop, text_prop})
@@ -60,8 +60,7 @@ class eff_simplex {
     let x = 0;
     let y = 0;
     let w = prepLayer.width;
-    let cpix = [0, 0, 0];
-    let cimage = get();
+    loadPixels();
     for (let index = 0; index < prepLayer.pixels.length; index += 4) {
       let pix = prepLayer.pixels[index];
       let mix = pix / 255;
@@ -70,11 +69,9 @@ class eff_simplex {
         output.pixels[index + 1] = srcImage.pixels[index + 1];
         output.pixels[index + 2] = srcImage.pixels[index + 2];
       } else {
-        // let cpix = get(x, y);
-        let cpix = cimage.get(x, y);
-        output.pixels[index] = cpix[0];
-        output.pixels[index + 1] = cpix[1];
-        output.pixels[index + 2] = cpix[2];
+        output.pixels[index] = pixels[index + 0];
+        output.pixels[index + 1] = pixels[index + 1];
+        output.pixels[index + 2] = pixels[index + 2];
       }
       x++;
       if (x >= w) {
