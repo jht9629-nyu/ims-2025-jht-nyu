@@ -5,9 +5,9 @@
 class eff_simplex {
   static meta_props = [
     //
-    { prop: 'uwidth', label: 'width', selection: [106, 100, 200, 300] },
-    { prop: 'uheight', label: 'height', selection: [60, 100, 200, 300] },
-    { prop: 'uspeed', label: 'speed', selection: [1, 0.2, 0.5, 1, 2, 4, 10] },
+    { prop: 'uwidth', label: 'width', selection: [100, 200, 300] },
+    // { prop: 'uheight', label: 'height', selection: [60, 100, 200, 300] },
+    { prop: 'uspeed', label: 'speed', selection: [1, 0.05, 0.1, 0.2, 0.5, 1, 2, 4, 10] },
     { prop: 'umix', label: 'mix', selection: [0.5, 0.1, 0.2, 0.5, 0.6, 0.8] },
   ];
 
@@ -24,60 +24,67 @@ class eff_simplex {
   }
 
   initGraphics() {
-    let w = this.uwidth || 106;
-    let h = this.uheight || 60;
-    console.log('eff_worley initGraphics w h', w, h);
-    this.layer = createGraphics(w, h);
     let { width, height } = this.input;
     console.log('eff_worley initGraphics width, height', width, height);
     // this.output = createImage(width, height);
-    this.layer2 = createGraphics(width, height);
+    this.prepLayer = createGraphics(width, height);
     this.output = createGraphics(width, height);
     // console.log('eff_worley initGraphics width, height', width, height);
+    //
+    let aspectRatio = height / width;
+    let w = this.uwidth || 100;
+    let h = Math.floor(w * aspectRatio);
+    console.log('eff_worley initGraphics w h', w, h);
+    this.noiseLayer = createGraphics(w, h);
   }
 
   prepareOutput() {
     // console.log('eff_example prepareOutput text_prop', this.text_prop);
-    let { layer, layer2, output } = this;
-    this.updateLayer(layer);
+    let { noiseLayer, prepLayer, output } = this;
+    this.updateLayer(noiseLayer);
 
-    // layer2 = Scale up low rez noise image to input rez
-    let sw = this.layer.width;
-    let sh = this.layer.height;
-    let dw = layer2.width;
-    let dh = layer2.height;
-    layer2.image(layer, 0, 0, dw, dh, 0, 0, sw, sh);
+    // prepLayer = Scale up low rez noise image to input rez
+    let sw = this.noiseLayer.width;
+    let sh = this.noiseLayer.height;
+    let dw = prepLayer.width;
+    let dh = prepLayer.height;
+    prepLayer.image(noiseLayer, 0, 0, dw, dh, 0, 0, sw, sh);
 
     let srcImage = this.input.get();
     srcImage.loadPixels();
-    layer2.loadPixels();
+    prepLayer.loadPixels();
     output.background(0);
     output.loadPixels();
-    console.log('layer2.pixels.length', layer2.pixels.length);
+    // console.log('prepLayer.pixels.length', prepLayer.pixels.length);
     let mixLevel = this.umix || 0.5;
-    for (let index = 0; index < layer2.pixels.length; index += 4) {
-      let pix = layer2.pixels[index];
+    let x = 0;
+    let y = 0;
+    let w = prepLayer.width;
+    let cpix = [0, 0, 0];
+    let cimage = get();
+    for (let index = 0; index < prepLayer.pixels.length; index += 4) {
+      let pix = prepLayer.pixels[index];
       let mix = pix / 255;
       if (mix > mixLevel) {
         output.pixels[index] = srcImage.pixels[index];
         output.pixels[index + 1] = srcImage.pixels[index + 1];
         output.pixels[index + 2] = srcImage.pixels[index + 2];
-        // output.pixels[index] = srcImage.pixels[index] ;
-        // output.pixels[index + 1] = srcImage.pixels[index + 1] * mix;
-        // output.pixels[index + 2] = srcImage.pixels[index + 2] * mix;
       } else {
-        pix = 0;
-        output.pixels[index] = pix;
-        output.pixels[index + 1] = pix;
-        output.pixels[index + 2] = pix;
-        // output.pixels[index] = layer2.pixels[index];
-        // output.pixels[index + 1] = layer2.pixels[index + 1];
-        // output.pixels[index + 2] = layer2.pixels[index + 2];
+        // let cpix = get(x, y);
+        let cpix = cimage.get(x, y);
+        output.pixels[index] = cpix[0];
+        output.pixels[index + 1] = cpix[1];
+        output.pixels[index + 2] = cpix[2];
+      }
+      x++;
+      if (x >= w) {
+        x = 0;
+        y++;
       }
     }
     output.updatePixels();
-
-    // output.image(layer2, 0, 0);
+    //
+    // output.image(prepLayer, 0, 0);
     // output.image(srcImage, 0, 0);
   }
 
@@ -89,11 +96,11 @@ class eff_simplex {
   // OVERLAY, HARD_LIGHT, SOFT_LIGHT, DODGE, BURN, ADD
   // blend(srcImage, sx, sy, sw, sh, dx, dy, dw, dh, blendMode)
 
-  updateLayer(layer) {
+  updateLayer(noiseLayer) {
     let xoff = 0;
-    let w = layer.width;
-    let h = layer.height;
-    // layer.clear();
+    let w = noiseLayer.width;
+    let h = noiseLayer.height;
+    // noiseLayer.clear();
     for (let x = 0; x < w; x++) {
       let yoff = 0;
       for (let y = 0; y < h; y++) {
@@ -102,8 +109,8 @@ class eff_simplex {
         // console.log('n',n)
         // let bright = n > 0 ? 255 : 0;
         let bright = map(n, -1, 1, 0, 255);
-        layer.stroke(bright, 255);
-        layer.point(x, y);
+        noiseLayer.stroke(bright);
+        noiseLayer.point(x, y);
         yoff += this.increment;
       }
       xoff += this.increment;
