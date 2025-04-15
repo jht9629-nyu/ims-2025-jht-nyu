@@ -8,6 +8,7 @@ class eff_simplex {
     { prop: 'uwidth', label: 'width', selection: [106, 100, 200, 300] },
     { prop: 'uheight', label: 'height', selection: [60, 100, 200, 300] },
     { prop: 'uspeed', label: 'speed', selection: [1, 0.2, 0.5, 1, 2, 4, 10] },
+    { prop: 'umix', label: 'mix', selection: [0.5, 0.1, 0.2, 0.5, 0.6, 0.8] },
   ];
 
   // new eff_example({message_prop1, num_prop, text_prop})
@@ -53,19 +54,30 @@ class eff_simplex {
     output.background(0);
     output.loadPixels();
     console.log('layer2.pixels.length', layer2.pixels.length);
+    let mixLevel = this.umix || 0.5;
     for (let index = 0; index < layer2.pixels.length; index += 4) {
-      let srcPix = layer2.pixels[index];
-      // console.log('', index, srcPix);
-      // if (srcPix) {
-      output.pixels[index] = srcImage.pixels[index];
-      output.pixels[index + 1] = srcImage.pixels[index + 1];
-      output.pixels[index + 2] = srcImage.pixels[index + 2];
-      // console.log('', output.pixels[index], output.pixels[index + 1], output.pixels[index + 2]);
-      // }
+      let pix = layer2.pixels[index];
+      let mix = pix / 255;
+      if (mix > mixLevel) {
+        output.pixels[index] = srcImage.pixels[index];
+        output.pixels[index + 1] = srcImage.pixels[index + 1];
+        output.pixels[index + 2] = srcImage.pixels[index + 2];
+        // output.pixels[index] = srcImage.pixels[index] ;
+        // output.pixels[index + 1] = srcImage.pixels[index + 1] * mix;
+        // output.pixels[index + 2] = srcImage.pixels[index + 2] * mix;
+      } else {
+        pix = 0;
+        output.pixels[index] = pix;
+        output.pixels[index + 1] = pix;
+        output.pixels[index + 2] = pix;
+        // output.pixels[index] = layer2.pixels[index];
+        // output.pixels[index + 1] = layer2.pixels[index + 1];
+        // output.pixels[index + 2] = layer2.pixels[index + 2];
+      }
     }
-    // output.updatePixels();
+    output.updatePixels();
 
-    output.image(layer2, 0, 0);
+    // output.image(layer2, 0, 0);
     // output.image(srcImage, 0, 0);
   }
 
