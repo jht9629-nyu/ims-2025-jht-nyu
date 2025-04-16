@@ -136,7 +136,7 @@ function secs() {
 }
 
 function create_ui() {
-  my.nextButton = createButton('?v=23 next');
+  my.nextButton = createButton('?v=24 next');
   my.nextButton.mousePressed(my_mousePressed);
   my.nextButton.style('font-size:42px');
 }

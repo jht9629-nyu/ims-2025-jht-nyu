@@ -75,7 +75,9 @@ function draw() {
 // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
 function render_layer(layer) {
-  let { width, height } = video;
+  // In video dimensions
+  let width = video.width;
+  let height = video.height;
   layer.push();
   layer.translate(width, 0);
   layer.scale(-1, 1); // mirror the video
@@ -158,7 +160,8 @@ function gotPoses(results) {
 
 // where the subject is in the frame
 function getSection(x) {
-  let { width } = video;
+  // In video dimensions
+  let width = video.width;
   if (x < width / 3) return 'left';
   if (x > (2 * width) / 3) return 'right';
   return 'center';
@@ -172,7 +175,7 @@ function keyPressed() {
 }
 
 function create_ui() {
-  my.fullScreenBtn = createButton('?v=23 Full Screen');
+  my.fullScreenBtn = createButton('?v=24 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 }
