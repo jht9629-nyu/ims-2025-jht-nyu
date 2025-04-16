@@ -175,7 +175,7 @@ function keyPressed() {
 }
 
 function create_ui() {
-  my.fullScreenBtn = createButton('?v=24 Full Screen');
+  my.fullScreenBtn = createButton('?v=25 Full Screen');
   my.fullScreenBtn.mousePressed(full_screen_action);
   my.fullScreenBtn.style('font-size:42px');
 }

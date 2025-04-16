@@ -11,7 +11,7 @@ let my = {};
 // Fork of source repo to preserve copy of media
 // github pages used to share media across sketches
 my.videoRootPath = 'https://p5videokit.github.io/ims03-olivia-GirlTime/images';
-let nvideos = 12;
+my.nvideos = 12;
 
 function setup() {
   createCanvas(windowWidth, windowHeight - 60);
@@ -20,11 +20,11 @@ function setup() {
   my.videos = [];
   my.videoPaths = [];
   my.videoShowTile = [];
-  my.videoWaitingCount = nvideos;
+  my.videoWaitingCount = my.nvideos;
   console.log('setup', secs());
   // console.time('setup_video');
 
-  for (let num = 1; num <= nvideos; num++) {
+  for (let num = 1; num <= my.nvideos; num++) {
     setup_video_num(num);
   }
   create_ui();
@@ -149,7 +149,7 @@ function secs() {
 }
 
 function create_ui() {
-  my.nextButton = createButton('?v=24 next');
+  my.nextButton = createButton('?v=25 next');
   my.nextButton.mousePressed(my_mousePressed);
   my.nextButton.style('font-size:42px');
 }
