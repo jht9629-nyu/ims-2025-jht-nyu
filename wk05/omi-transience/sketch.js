@@ -28,7 +28,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - 40);
   // createCanvas(1600, 1200);
   // colWidth = width / cols;
 
@@ -52,6 +52,22 @@ function draw() {
     // console.log('waiting for video', millis() / 1000);
     return;
   }
+  render_layer(layer);
+  background(0);
+  let dw = width;
+  let dh = height;
+  let sw = layer.width;
+  let sh = layer.height;
+  // Correct for the video aspect ratio
+  dh = dw * (sh / sw);
+  // Image video to full width of canvas
+  // height is adjusted for aspect ratio
+  image(layer, 0, 0, dw, dh, 0, 0, sw, sh);
+}
+
+// image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
+
+function render_layer(layer) {
   let { width, height } = video;
   layer.push();
   layer.translate(width, 0);
@@ -98,8 +114,6 @@ function draw() {
       layer.image(capturedFrames[i], i * colWidth, 0);
     }
   }
-
-  image(layer, 0, 0);
 }
 
 function gotPoses(results) {
