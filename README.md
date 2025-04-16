@@ -33,4 +33,4 @@
 ## wk05
 
 - [lib_videoKit_v0](wk05/lib_videoKit_v0)
-- [lib_videoKit_v1](wk05/lib_videoKit_v1)
+- [lib_videoKit_simplex](wk05/lib_videoKit_simplex)
