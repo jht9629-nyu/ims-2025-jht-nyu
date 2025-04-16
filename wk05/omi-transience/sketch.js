@@ -21,32 +21,50 @@ let captureDirection = 1; // 1 towards right, -1 towards left
 let triggered = false;
 let lastPoseDetected = false;
 
+let my = {};
+
 function preload() {
   bodyPose = ml5.bodyPose({ flipped: true }); // ml5 with flipped video
 }
 
 function setup() {
-  createCanvas(1600, 1200);
-  colWidth = width / cols;
+  createCanvas(windowWidth, windowHeight);
+  // createCanvas(1600, 1200);
+  // colWidth = width / cols;
 
-  video = createCapture(VIDEO);
-  video.size(1600, 1200);
+  video = createCapture(VIDEO, () => {
+    console.log('createCapture callback width heigth', video.width, video.height);
+    my.layer = createGraphics(video.width, video.height);
+    colWidth = video.width / cols;
+  });
+  // video.size(960, 540);
+  // video.size(1920, 1080);
+  // video.size(1600, 1200);
   video.hide();
 
-  bodyPose.detectStart(video, gotPoses); // pose detection
+  // pose detection
+  bodyPose.detectStart(video, gotPoses);
 }
 
 function draw() {
-  push();
-  translate(width, 0);
-  scale(-1, 1); // mirror the video
-  image(video, 0, 0, width, height);
-  pop();
+  let layer = my.layer;
+  if (!layer) {
+    // console.log('waiting for video', millis() / 1000);
+    return;
+  }
+  let { width, height } = video;
+  layer.push();
+  layer.translate(width, 0);
+  layer.scale(-1, 1); // mirror the video
+  layer.image(video, 0, 0, width, height);
+  layer.pop();
 
-  if (capturing && millis() - lastCaptureTime > captureInterval && currentCol < cols && currentCol >= 0) {
+  let lapsed = millis() - lastCaptureTime > captureInterval;
+  if (capturing && lapsed && currentCol < cols && currentCol >= 0) {
     let x = width - (currentCol + 1) * colWidth;
     let colImage = createImage(colWidth, height);
-    colImage.copy(video, x, 0, colWidth, height, 0, 0, colWidth, height); // image of the column
+    // image of the column
+    colImage.copy(video, x, 0, colWidth, height, 0, 0, colWidth, height);
 
     // flipping the columns horizontally
     colImage.loadPixels();
@@ -74,12 +92,14 @@ function draw() {
       triggered = false; // Allow new pose detection
     }
   }
-  // draw captured columns on canvas
+  // draw captured columns on the layer
   for (let i = 0; i < capturedFrames.length; i++) {
     if (capturedFrames[i]) {
-      image(capturedFrames[i], i * colWidth, 0);
+      layer.image(capturedFrames[i], i * colWidth, 0);
     }
   }
+
+  image(layer, 0, 0);
 }
 
 function gotPoses(results) {
@@ -117,6 +137,7 @@ function gotPoses(results) {
 
 // where the subject is in the frame
 function getSection(x) {
+  let { width } = video;
   if (x < width / 3) return 'left';
   if (x > (2 * width) / 3) return 'right';
   return 'center';
