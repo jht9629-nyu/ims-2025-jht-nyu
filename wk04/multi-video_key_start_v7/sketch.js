@@ -8,6 +8,8 @@
 // console.log must be used sparingly, affects performance
 
 let my = {};
+// Fork of source repo to preserve copy of media
+// github pages used to share media across sketches
 my.videoRootPath = 'https://p5videokit.github.io/ims03-olivia-GirlTime/images';
 let nvideos = 12;
 
@@ -16,7 +18,7 @@ function setup() {
   my.videoIndex = 0;
   my.videos = [];
   my.videoPaths = [];
-  my.videoTileShow = [];
+  my.videoShowTile = [];
   my.videoWaitingCount = nvideos;
   console.log('setup', secs());
   // console.time('setup_video');
@@ -59,9 +61,9 @@ function draw() {
 
 // 6 videos are layout in top quarter of canvas
 function draw_video_tiles() {
-  let n = my.videoTileShow.length;
+  let n = my.videoShowTile.length;
   for (let index = 0; index < n; index++) {
-    let state = my.videoTileShow[index];
+    let state = my.videoShowTile[index];
     // console.log('draw_updateVideos index', index, 'state', state);
     let frac = 1 / 6;
     if (state) {
@@ -104,11 +106,11 @@ function keyPressed() {
 }
 
 function start_video_atIndex(index) {
-  my.videoTileShow[index] = true;
+  my.videoShowTile[index] = true;
 }
 
 function stop_video_atIndex(index) {
-  my.videoTileShow[index] = false;
+  my.videoShowTile[index] = false;
 }
 
 // disabled for my.nextButton
