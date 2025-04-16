@@ -1,6 +1,11 @@
-//
+// https://editor.p5js.org/jht9629-nyu/sketches/P_fljj9ev
+// Transience omi v1
+// createGraphics use to scale video
+// to full screen with correct aspect ratio
+
 // https://omibahuguna.github.io/ims-2025-omi/Transience/
 // https://editor.p5js.org/omi99/sketches
+// https://editor.p5js.org/omi99/sketches/ohwy2A1tC
 
 // Dan Shiffman slit-scan tutorial: https://www.youtube.com/watch?v=WCJM9WIoudI
 
@@ -28,7 +33,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight - 40);
+  createCanvas(windowWidth, windowHeight - 60);
   // createCanvas(1600, 1200);
   // colWidth = width / cols;
 
@@ -44,6 +49,8 @@ function setup() {
 
   // pose detection
   bodyPose.detectStart(video, gotPoses);
+
+  create_ui();
 }
 
 function draw() {
@@ -162,4 +169,26 @@ function keyPressed() {
   if (key === 's' || key === 'S') {
     saveCanvas('slit-scan-capture', 'png');
   }
+}
+
+function create_ui() {
+  my.fullScreenBtn = createButton('?v=23 Full Screen');
+  my.fullScreenBtn.mousePressed(full_screen_action);
+  my.fullScreenBtn.style('font-size:42px');
+}
+
+function full_screen_action() {
+  my.fullScreenBtn.remove();
+  fullscreen(1);
+  let delay = 3000;
+  setTimeout(ui_present_window, delay);
+}
+
+function ui_present_window() {
+  resizeCanvas(windowWidth, windowHeight);
+  // init_dim();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
