@@ -15,6 +15,7 @@ let nvideos = 12;
 
 function setup() {
   createCanvas(windowWidth, windowHeight - 60);
+
   my.videoIndex = 0;
   my.videos = [];
   my.videoPaths = [];
@@ -22,10 +23,20 @@ function setup() {
   my.videoWaitingCount = nvideos;
   console.log('setup', secs());
   // console.time('setup_video');
+
   for (let num = 1; num <= nvideos; num++) {
     setup_video_num(num);
   }
   create_ui();
+
+  // my.videos[0].play();
+  // Attempting to play video before ui guesture gives error
+  /*
+  🌸 p5.js says: The media that tried to play (with
+  'https://p5videokit.github.io/ims03-olivia-GirlTime/images/1.mov') 
+  wasn't allowed to by this browser, 
+  most likely due to the browser's autoplay policy.
+  */
 }
 
 function setup_video_num(num) {
