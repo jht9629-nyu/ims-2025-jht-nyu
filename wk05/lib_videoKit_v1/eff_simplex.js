@@ -59,7 +59,9 @@ class eff_simplex {
     let mixLevel = this.umix || 0.5;
     let x = 0;
     let y = 0;
-    let w = prepLayer.width;
+    let w = width;
+    let step = w / dw;
+    // console.log('eff_simplex step', step);
     loadPixels();
     for (let index = 0; index < prepLayer.pixels.length; index += 4) {
       let pix = prepLayer.pixels[index];
@@ -69,14 +71,15 @@ class eff_simplex {
         output.pixels[index + 1] = srcImage.pixels[index + 1];
         output.pixels[index + 2] = srcImage.pixels[index + 2];
       } else {
-        output.pixels[index] = pixels[index + 0];
-        output.pixels[index + 1] = pixels[index + 1];
-        output.pixels[index + 2] = pixels[index + 2];
+        let cindex = (x + y * w) * 4;
+        output.pixels[index] = pixels[cindex + 0];
+        output.pixels[index + 1] = pixels[cindex + 1];
+        output.pixels[index + 2] = pixels[cindex + 2];
       }
-      x++;
+      x += step;
       if (x >= w) {
         x = 0;
-        y++;
+        y += step;
       }
     }
     output.updatePixels();
