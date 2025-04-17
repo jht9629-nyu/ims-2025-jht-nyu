@@ -1,5 +1,6 @@
 // https://editor.p5js.org/jht9629-nyu/sketches/CAtSXsCDI
 // lib videoKit v1
+// eff_simplix.js is use to mix live video with another effect
 
 // home for library routines
 let videoKit;
@@ -9,7 +10,7 @@ let my = {};
 
 function setup() {
   // disables FES to improve performance
-  p5.disableFriendlyErrors = true; 
+  p5.disableFriendlyErrors = true;
 
   // Lowest pixel density for performance
   pixelDensity(1);
