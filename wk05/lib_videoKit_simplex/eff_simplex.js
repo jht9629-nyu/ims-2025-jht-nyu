@@ -50,19 +50,27 @@ class eff_simplex {
     let dh = prepLayer.height;
     prepLayer.image(noiseLayer, 0, 0, dw, dh, 0, 0, sw, sh);
 
+    // Output starts out black
+    output.background(0);
+
+    // input (video) is combined with prepLayer (noise) and canvas
+    //
     let srcImage = this.input.get();
     srcImage.loadPixels();
     prepLayer.loadPixels();
-    output.background(0);
     output.loadPixels();
+    loadPixels();
     // console.log('prepLayer.pixels.length', prepLayer.pixels.length);
+    // mixLevel determines if pixel comes from input
+    // or canvas
     let mixLevel = this.umix || 0.5;
+    //
+    // x, y, step maps to canvas dimension
     let x = 0;
     let y = 0;
     let w = width;
     let step = w / dw;
     // console.log('eff_simplex step', step);
-    loadPixels();
     for (let index = 0; index < prepLayer.pixels.length; index += 4) {
       let pix = prepLayer.pixels[index];
       let mix = pix / 255;
