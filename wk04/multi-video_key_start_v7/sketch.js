@@ -1,5 +1,6 @@
 // https://editor.p5js.org/jht9629-nyu/sketches/nDXZJsqoY
 // multi-video key start v7
+// preload vs. completion call back
 
 // keys to start/stop video 1,2 | 3,4 | 5,6 | 7,8 | 9,0 | -,=
 // 6 videos are layout in top quarter of canvas
