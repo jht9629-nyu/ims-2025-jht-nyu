@@ -1,21 +1,5 @@
-// https://editor.p5js.org/jht9629-nyu/sketches/Ol61gpdR1
-// Slime Molds v0
-
-// https://openprocessing.org/sketch/2213463
-
-/*
------ Coding Tutorial by Patt Vira ----- 
-Name: Slime Molds (Physarum)
-Video Tutorial: https://youtu.be/VyXxSNcgDtg
-
-References: 
-1. Algorithm by Jeff Jones: 
-https://uwe-repository.worktribe.com/output/980579/characteristics-of-pattern-formation-and-evolution-in-approximations-of-physarum-transport-networks
-
-Connect with Patt: @pattvira
-https://www.pattvira.com/
-----------------------------------------
-*/
+// https://editor.p5js.org/jht9629-nyu/sketches/JG8Tv5W90
+// Slime Molds v1
 
 let molds = [];
 let num = 4000;
@@ -30,7 +14,7 @@ function setup() {
     molds[i] = new Mold();
   }
   describe(
-    "This sketch simulates behaviors of slime molds. Each slime mold object has position (x and y), traveling direction (r and heading angle) and sensor (in 3 directions: front, left, and forward). As a slime mold moves through the trail, it leaves a trace and the trail map is updated. In each simulation step, a slime mold senses the trail map (the pixel color value) and decides which direction to move and rotate.",
+    'This sketch simulates behaviors of slime molds. Each slime mold object has position (x and y), traveling direction (r and heading angle) and sensor (in 3 directions: front, left, and forward). As a slime mold moves through the trail, it leaves a trace and the trail map is updated. In each simulation step, a slime mold senses the trail map (the pixel color value) and decides which direction to move and rotate.',
     LABEL
   );
 }
@@ -82,19 +66,13 @@ class Mold {
 
     // Get indices of the 3 sensor positions and get the color values from those indices
     let index, l, r, f;
-    index =
-      4 * (d * floor(this.rSensorPos.y)) * (d * width) +
-      4 * (d * floor(this.rSensorPos.x));
+    index = 4 * (d * floor(this.rSensorPos.y)) * (d * width) + 4 * (d * floor(this.rSensorPos.x));
     r = pixels[index];
 
-    index =
-      4 * (d * floor(this.lSensorPos.y)) * (d * width) +
-      4 * (d * floor(this.lSensorPos.x));
+    index = 4 * (d * floor(this.lSensorPos.y)) * (d * width) + 4 * (d * floor(this.lSensorPos.x));
     l = pixels[index];
 
-    index =
-      4 * (d * floor(this.fSensorPos.y)) * (d * width) +
-      4 * (d * floor(this.fSensorPos.x));
+    index = 4 * (d * floor(this.fSensorPos.y)) * (d * width) + 4 * (d * floor(this.fSensorPos.x));
     f = pixels[index];
 
     // Compare values of f, l, and r to determine movement
@@ -130,3 +108,22 @@ class Mold {
     sensor.y = (this.y + this.sensorDist * sin(angle) + height) % height;
   }
 }
+
+// https://editor.p5js.org/jht9629-nyu/sketches/Ol61gpdR1
+// Slime Molds v0
+
+// https://openprocessing.org/sketch/2213463
+
+/*
+----- Coding Tutorial by Patt Vira ----- 
+Name: Slime Molds (Physarum)
+Video Tutorial: https://youtu.be/VyXxSNcgDtg
+
+References: 
+1. Algorithm by Jeff Jones: 
+https://uwe-repository.worktribe.com/output/980579/characteristics-of-pattern-formation-and-evolution-in-approximations-of-physarum-transport-networks
+
+Connect with Patt: @pattvira
+https://www.pattvira.com/
+----------------------------------------
+*/
