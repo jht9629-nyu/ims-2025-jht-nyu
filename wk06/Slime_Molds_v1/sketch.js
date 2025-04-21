@@ -4,19 +4,22 @@
 let molds = [];
 let num = 4000;
 let d;
+let my = {};
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight - 60);
   angleMode(DEGREES);
   d = pixelDensity();
 
+  create_ui();
+
+  init_molds();
+}
+
+function init_molds() {
   for (let i = 0; i < num; i++) {
     molds[i] = new Mold();
   }
-  describe(
-    'This sketch simulates behaviors of slime molds. Each slime mold object has position (x and y), traveling direction (r and heading angle) and sensor (in 3 directions: front, left, and forward). As a slime mold moves through the trail, it leaves a trace and the trail map is updated. In each simulation step, a slime mold senses the trail map (the pixel color value) and decides which direction to move and rotate.',
-    LABEL
-  );
 }
 
 function draw() {
@@ -108,6 +111,29 @@ class Mold {
     sensor.y = (this.y + this.sensorDist * sin(angle) + height) % height;
   }
 }
+
+function create_ui() {
+  my.fullScreenBtn = createButton('?v=27 Full Screen');
+  my.fullScreenBtn.mousePressed(full_screen_action);
+  my.fullScreenBtn.style('font-size:42px');
+}
+
+function full_screen_action() {
+  my.fullScreenBtn.remove();
+  fullscreen(1);
+  let delay = 3000;
+  setTimeout(ui_present_window, delay);
+}
+
+function ui_present_window() {
+  resizeCanvas(windowWidth, windowHeight);
+  init_molds();
+}
+
+// function windowResized() {
+//   // resizeCanvas(windowWidth, windowHeight);
+//   ui_present_window();
+// }
 
 // https://editor.p5js.org/jht9629-nyu/sketches/Ol61gpdR1
 // Slime Molds v0
