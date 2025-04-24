@@ -150,10 +150,11 @@ class Mold {
 
   // set my.wrapped if x or y will wrap around
   wrapCheck() {
-    let { layer } = this;
+    let { parent, layer } = this;
     let { width, height } = layer;
     let nx = this.x + this.vx;
     let ny = this.y + this.vy;
+    // console.log('wrapCheck nx', nx, ny);
     if (nx >= width || nx <= 0) parent.wrapX = 1;
     if (ny >= height || ny <= 0) parent.wrapY = 1;
   }
@@ -162,7 +163,9 @@ class Mold {
     let { parent, layer } = this;
     layer.noStroke();
     let clr = parent.cycleColors[parent.cycleIndex];
-    fill(clr);
+    // console.log('clr', clr);
+    // console.log('parent', parent, parent.cycleColors, parent.cycleIndex, clr);
+    layer.fill(clr);
     layer.ellipse(this.x, this.y, 1, 1);
   }
 
