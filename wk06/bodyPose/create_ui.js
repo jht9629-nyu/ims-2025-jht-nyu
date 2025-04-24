@@ -153,6 +153,8 @@ function show_action() {
 }
 
 function hide_action() {
+  console.log('hide_action');
+  return;
   id_main.classList.add('hidden');
   my.face_hidden = 1;
 }

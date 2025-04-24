@@ -21,7 +21,7 @@ function bodyPose_init() {
     hi_rez: 1,
     alpha: 255,
     ndetect: 1,
-    figure_color: 1,
+    figure_color: 0,
     stroke_weight: 0,
     points: 0,
     points_size: 10,

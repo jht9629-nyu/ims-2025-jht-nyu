@@ -24,6 +24,8 @@ function setup() {
 
   // delay any photo add for 5 secs during startup
   add_action_block(5);
+
+  document.body.style.backgroundColor = `rgb(0,0,0)`;
 }
 
 async function video_setup() {
@@ -39,7 +41,8 @@ async function video_setup() {
 
   my.input = my.video;
 
-  // bodyPose_init();
+  bodyPose_init();
+
   slime_mold_init();
 
   my.bestill = new eff_bestill({ factor: 10, input: my.output });
@@ -53,28 +56,11 @@ function slime_mold_init() {
 
   my.slime_mold = new eff_slime_mold(props);
 
-  my.output = my.slime_mold.output;
+  // my.output = my.slime_mold.output;
 }
 
 function draw() {
   //
-  if (my.slime_mold) {
-    first_mesh_check();
-
-    my.output.background(0);
-
-    my.slime_mold.prepareOutput();
-
-    let sw = my.video.width;
-    let sh = my.video.height;
-    let aspect = sh / sw;
-    let w = width;
-    let h = width * aspect;
-    image(my.slime_mold.output, 0, 0, w, h, 0, 0, sw, sh);
-  }
-
-  // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
-
   photo_list_update_poll();
 
   proto_prune_poll();
@@ -82,33 +68,52 @@ function draw() {
   let str = my.photo_list.length + ' ' + my.photo_index;
   my.photo_count_span.html(str);
 
-  if (my.imgLayer) {
-    let clr = my.imgLayer.get(0, 0);
-    document.body.style.backgroundColor = `rgb(${clr[0]},${clr[1]},${clr[2]}`;
-  } else {
-    let clr = [0, 0, 0];
-    document.body.style.backgroundColor = `rgb(${clr[0]},${clr[1]},${clr[2]}`;
-  }
-
   my.lipsDiff = 0;
 
-  if (!my.bodyPose || !my.bodyPose.poses) return;
-
-  if (my.bodyPose.poses.length > 0) {
-    first_mesh_check();
-  }
-
-  check_show_hide();
-
-  if (my.show_mesh) {
-    draw_mesh();
+  if (!my.bodyPose || !my.bodyPose.poses) {
+    console.log('no bodyPose');
   } else {
-    image(my.video, 0, 0);
-    if (my.imgLayer) {
-      image(my.imgLayer, width / 2, 0);
+    if (my.bodyPose.poses.length > 0) {
+      first_mesh_check();
+    }
+
+    check_show_hide();
+
+    if (my.show_mesh) {
+      draw_mesh();
+    } else {
+      image(my.video, 0, 0);
+      if (my.imgLayer) {
+        image(my.imgLayer, width / 2, 0);
+      }
     }
   }
+
+  draw_slim_mold();
 }
+
+function draw_slim_mold() {
+  if (!my.slime_mold) {
+    return;
+  }
+  first_mesh_check();
+
+  // my.output.background(0);
+  my.slime_mold.prepareOutput();
+
+  let sw = my.video.width;
+  let sh = my.video.height;
+  let aspect = sh / sw;
+  let w = width;
+  let h = width * aspect;
+  // blendMode(OVERLAY);
+  // image(my.slime_mold.output, 0, 0, w, h, 0, 0, sw, sh);
+}
+
+// BLEND, DARKEST, LIGHTEST, DIFFERENCE, MULTIPLY, EXCLUSION, SCREEN, REPLACE,
+// OVERLAY, HARD_LIGHT, SOFT_LIGHT, DODGE, BURN, ADD or NORMAL
+
+// image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
 function draw_mesh() {
   // my.output.background(my.avg_color);
