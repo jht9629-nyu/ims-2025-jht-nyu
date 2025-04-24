@@ -35,3 +35,7 @@
 - [lib_videoKit_v0](wk05/lib_videoKit_v0)
 - [lib_videoKit_simplex](wk05/lib_videoKit_simplex)
 - [omi-transience](wk05/omi-transience)
+
+## wk05
+
+- [Slime_Molds_v1](wk06/Slime_Molds_v1)
