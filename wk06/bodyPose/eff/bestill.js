@@ -1,6 +1,6 @@
 // import { image_copy_to } from '../../util/image.js?v={{vers}}';
 
-// export default 
+// export default
 class eff_bestill {
   // static meta_props = {
   //   factor: [10, 1, 5, 10, 20, 40, 50, 100, 200, 500, 1000, 2000, 3000, 5000, 10000],
@@ -16,7 +16,7 @@ class eff_bestill {
   init() {
     this.stillf = [this.factor, this.factor, this.factor];
     let input = this.input;
-    this.output = createImage(input.width, input.height);
+    this.output = createGraphics(input.width, input.height);
     this.srcimage = createImage(this.output.width, this.output.height);
     this.buf = [];
     // console.log('eff_bestill stillf', this.stillf);

@@ -41,11 +41,11 @@ async function video_setup() {
 
   my.input = my.video;
 
-  bodyPose_init();
+  my.slime_mold = slime_mold_init();
 
-  slime_mold_init();
+  my.bodyPose = bodyPose_init();
 
-  my.bestill = new eff_bestill({ factor: 10, input: my.output });
+  my.bestill = new eff_bestill({ factor: 10, input: my.bodyPose.output });
 
   console.log('video_setup return');
 }
@@ -54,8 +54,8 @@ function slime_mold_init() {
   let { width, height } = my.video;
   let props = { width, height };
 
-  my.slime_mold = new eff_slime_mold(props);
-
+  return new eff_slime_mold(props);
+  // my.slime_mold = new eff_slime_mold(props);
   // my.output = my.slime_mold.output;
 }
 
@@ -89,7 +89,15 @@ function draw() {
     }
   }
 
-  draw_slim_mold();
+  // draw_slim_mold();
+
+  if (my.fpsSpan) {
+    my.fpsSpan.html(framesPerSecond() + ' ');
+  }
+}
+
+function framesPerSecond() {
+  return frameRate().toFixed(2);
 }
 
 function draw_slim_mold() {
@@ -107,28 +115,52 @@ function draw_slim_mold() {
   let w = width;
   let h = width * aspect;
   // blendMode(OVERLAY);
-  // image(my.slime_mold.output, 0, 0, w, h, 0, 0, sw, sh);
+  image(my.slime_mold.output, 0, 0, w, h, 0, 0, sw, sh);
 }
 
 // BLEND, DARKEST, LIGHTEST, DIFFERENCE, MULTIPLY, EXCLUSION, SCREEN, REPLACE,
 // OVERLAY, HARD_LIGHT, SOFT_LIGHT, DODGE, BURN, ADD or NORMAL
-
 // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
 function draw_mesh() {
-  // my.output.background(my.avg_color);
-  my.output.background(0);
+  //
+  my.bodyPose.output.background(0);
 
   my.bodyPose.prepareOutput();
 
   my.bestill.prepareOutput();
 
-  let aspect = my.video.height / my.video.width;
-  let w = my.output.width;
-  let h = my.output.width * aspect;
-  image(my.bestill.output, 0, 0, w, h);
+  my.slime_mold.prepareOutput();
+  mix_graphics(my.bestill.output, my.slime_mold.output);
 
-  // image(my.bestill.output, 0, 0);
+  let sw = my.video.width;
+  let sh = my.video.height;
+  let aspect = sh / sw;
+  let w = width;
+  let h = width * aspect;
+  image(my.bestill.output, 0, 0, w, h, 0, 0, sw, sh);
+}
+
+// non-black pixels from input are mixed into output
+//
+function mix_graphics(output, input) {
+  //
+  output.loadPixels();
+  input.loadPixels();
+  let n = input.pixels.length;
+  let in_r, in_g, in_b;
+  let ou_r, ou_g, ou_b;
+  for (let index = 0; index < n; index += 4) {
+    in_r = input.pixels[index];
+    in_g = input.pixels[index + 1];
+    in_b = input.pixels[index + 2];
+    if (in_r > 0 && in_g > 0 && in_b > 0) {
+      output.pixels[index] = in_r;
+      output.pixels[index + 1] = in_g;
+      output.pixels[index + 2] = in_b;
+    }
+  }
+  output.updatePixels();
 }
 
 // wait 0.5 seconds before showing face mesh

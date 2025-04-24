@@ -11,8 +11,10 @@ function bodyPose_init() {
     urect: {
       x0: 0,
       y0: 0,
-      width: width,
-      height: height,
+      width: my.video.width,
+      height: my.video.height,
+      // width: width,
+      // height: height,
     },
   };
   let props = {
@@ -29,10 +31,10 @@ function bodyPose_init() {
     skel: 0,
     skel_weight: 0,
     skel_color_offset: 0,
-    hflip: 0,
+    hflip: true,
     show_head: 1,
   };
-  my.bodyPose = new eff_bodyPose(props);
-
-  my.output = my.bodyPose.output;
+  return new eff_bodyPose(props);
+  // my.bodyPose = new eff_bodyPose(props);
+  // my.output = my.bodyPose.output;
 }

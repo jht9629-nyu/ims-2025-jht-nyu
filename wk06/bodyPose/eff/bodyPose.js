@@ -27,7 +27,7 @@ class eff_bodyPose {
       this.bodyPose.video = this.video;
     }
     window.a_poses = this.poses;
-    let layer = my.output;
+    let layer = this.output;
     if (this.points) this.drawKeypoints(layer, this.poses);
     if (this.skel) this.drawSkeleton(layer, this.poses);
     this.drawFigure(layer, this.poses);

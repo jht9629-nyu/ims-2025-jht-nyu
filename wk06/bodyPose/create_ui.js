@@ -41,7 +41,11 @@ function create_ui() {
     my.removeBtn.mousePressed(remove_all_action);
   }
 
-  my.photo_count_span = ui_span(0, '' + my.photo_list.length);
+  my.fpsSpan = ui_span('');
+  my.fpsSpan.elt.style.backgroundColor = 'white';
+  // my.fpsSpan.style('font-size:42px');
+
+  my.photo_count_span = ui_span(0, ' ' + my.photo_list.length);
   my.photo_count_span.elt.style.backgroundColor = 'white';
 
   // Move the canvas below all the ui buttons
