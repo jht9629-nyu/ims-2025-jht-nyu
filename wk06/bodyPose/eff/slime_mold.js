@@ -28,6 +28,9 @@ class eff_slime_mold {
 
     this.layer.background(0);
     // this.layer.clear();
+
+    this.cycleIndex = 1;
+    this.cycleColors = ['white', 'red', 'green', 'gold', 'black'];
   }
 
   prepareOutput() {
@@ -43,21 +46,29 @@ class eff_slime_mold {
       mold.update();
       mold.display();
     }
+
+    if (this.wrapX && this.wrapY) {
+      this.cycleIndex = (this.cycleIndex + 1) % this.cycleColors.length;
+      this.init_molds();
+    }
   }
 
   init_molds() {
-    let { layer } = this;
     let molds = [];
     let num = this.u_num;
     for (let i = 0; i < num; i++) {
-      molds[i] = new Mold(layer);
+      molds[i] = new Mold(this);
     }
     this.molds = molds;
+    this.wrapX = 0;
+    this.wrapY = 0;
   }
 }
 
 class Mold {
-  constructor(layer) {
+  constructor(parent) {
+    let layer = parent.layer;
+    this.parent = parent;
     this.layer = layer;
     let { width, height } = layer;
     // Mold variables
@@ -87,6 +98,8 @@ class Mold {
     let { width, height } = layer;
     // console.log('update ', width, height);
 
+    this.wrapCheck();
+
     this.vx = cos(radians(this.heading));
     this.vy = sin(radians(this.heading));
 
@@ -98,40 +111,26 @@ class Mold {
     // console.log('x y ', this.x, this.y);
 
     // Get 3 sensor positions based on current position and heading
-
-    // console.log('rSensorPos', this.rSensorPos);
-    // console.log('getSensorPos', this.rSensorPos.x, this.rSensorPos.y, this.sensorAngle);
-
     this.getSensorPos(this.rSensorPos, this.heading + this.sensorAngle);
     this.getSensorPos(this.lSensorPos, this.heading - this.sensorAngle);
     this.getSensorPos(this.fSensorPos, this.heading);
 
     // Get indices of the 3 sensor positions and get the color values from those indices
     let index, l, r, f, x, y;
-    // console.log('rSensorPos', this.rSensorPos.x, this.rSensorPos.y);
     x = floor(this.rSensorPos.x);
     y = floor(this.rSensorPos.y);
     index = 4 * (y * width + x);
-    // index = 4 * (floor(this.rSensorPos.y)) * width) + 4 * floor(this.rSensorPos.x));
-    // index = 4 * (d * floor(this.rSensorPos.y)) * (d * width) + 4 * (d * floor(this.rSensorPos.x));
     r = layer.pixels[index];
-    // console.log(' r, l, f', index, r);
 
-    // console.log('lSensorPos', this.lSensorPos.x, this.lSensorPos.y);
     x = floor(this.lSensorPos.x);
     y = floor(this.lSensorPos.y);
     index = 4 * (y * width + x);
-    // index = 4 * (d * floor(this.lSensorPos.y)) * (d * width) + 4 * (d * floor(this.lSensorPos.x));
     l = layer.pixels[index];
 
-    // console.log('fSensorPos', this.fSensorPos.x, this.fSensorPos.y);
     x = floor(this.fSensorPos.x);
     y = floor(this.fSensorPos.y);
     index = 4 * (y * width + x);
-    // index = 4 * (d * floor(this.fSensorPos.y)) * (d * width) + 4 * (d * floor(this.fSensorPos.x));
     f = layer.pixels[index];
-    // console.log(' fSensorPos', index, this.fSensorPos.x, this.fSensorPos.y);
-    // console.log(' r, l, f', r, l, f);
 
     // Compare values of f, l, and r to determine movement
     if (f > l && f > r) {
@@ -149,19 +148,27 @@ class Mold {
     }
   }
 
-  display() {
+  // set my.wrapped if x or y will wrap around
+  wrapCheck() {
     let { layer } = this;
+    let { width, height } = layer;
+    let nx = this.x + this.vx;
+    let ny = this.y + this.vy;
+    if (nx >= width || nx <= 0) parent.wrapX = 1;
+    if (ny >= height || ny <= 0) parent.wrapY = 1;
+  }
+
+  display() {
+    let { parent, layer } = this;
     layer.noStroke();
-    layer.fill(255);
+    let clr = parent.cycleColors[parent.cycleIndex];
+    fill(clr);
     layer.ellipse(this.x, this.y, 1, 1);
-    // layer.ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 
   getSensorPos(sensor, angle) {
     let { layer } = this;
     let { width, height } = layer;
-    // console.log('getSensorPos', sensor.x, sensor.y, angle);
-    // console.log('getSensorPos', sensor.x, sensor.y, angle);
     angle = radians(angle);
     sensor.x = (this.x + this.sensorDist * cos(angle) + width) % width;
     sensor.y = (this.y + this.sensorDist * sin(angle) + height) % height;
@@ -219,3 +226,6 @@ https://www.pattvira.com/
 
 // https://editor.p5js.org/jht9629-nyu/sketches/JG8Tv5W90
 // Slime Molds v1
+
+// https://editor.p5js.org/jht9629-nyu/sketches/n4PPY4sF1
+// Slime Molds v2
