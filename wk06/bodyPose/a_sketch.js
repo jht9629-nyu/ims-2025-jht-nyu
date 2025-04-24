@@ -2,7 +2,8 @@
 // poseNet
 
 let my = {};
-let colorPalette = ['red', 'green', 'gold', 'black'];
+my.cycleColors = ['red', 'green', 'gold', 'black'];
+my.cycleIndex = 0;
 
 function setup() {
   // createCanvas(640, 480);
@@ -18,7 +19,8 @@ function setup() {
 
   create_ui();
 
-  setup_dbase();
+  // setup_dbase();
+  my.waiting_for_first_mesh = 1;
 
   // delay any photo add for 5 secs during startup
   add_action_block(5);
@@ -33,56 +35,46 @@ async function video_setup() {
 
   // console.log('video_setup new eff_bars');
 
-  my.bars = new eff_bars({ width: my.video.width, height: my.video.height });
+  // my.bars = new eff_bars({ width: my.video.width, height: my.video.height });
 
   my.input = my.video;
 
-  bodyPose_init();
+  // bodyPose_init();
+  slime_mold_init();
 
   my.bestill = new eff_bestill({ factor: 10, input: my.output });
 
   console.log('video_setup return');
 }
 
-function bodyPose_init() {
-  // my.output = createGraphics(width, height);
-  // // my.output.noStroke();
-  // my.output.clear();
-  let eff_spec = {
-    ipatch: 2,
-    imedia: 1,
-    eff_label: 'bodyPose',
-    urect: {
-      x0: 0,
-      y0: 0,
-      width: width,
-      height: height,
-    },
-  };
-  let props = {
-    eff_spec,
-    input: my.video,
-    hi_rez: 1,
-    alpha: 255,
-    ndetect: 1,
-    figure_color: 1,
-    stroke_weight: 0,
-    points: 0,
-    points_size: 10,
-    points_color_offset: 0,
-    skel: 0,
-    skel_weight: 0,
-    skel_color_offset: 0,
-    hflip: 0,
-    show_head: 1,
-  };
-  my.bodyPose = new eff_bodyPose(props);
+function slime_mold_init() {
+  let { width, height } = my.video;
+  let props = { width, height };
 
-  my.output = my.bodyPose.output;
+  my.slime_mold = new eff_slime_mold(props);
+
+  my.output = my.slime_mold.output;
 }
 
 function draw() {
   //
+  if (my.slime_mold) {
+    first_mesh_check();
+
+    my.output.background(0);
+
+    my.slime_mold.prepareOutput();
+
+    let sw = my.video.width;
+    let sh = my.video.height;
+    let aspect = sh / sw;
+    let w = width;
+    let h = width * aspect;
+    image(my.slime_mold.output, 0, 0, w, h, 0, 0, sw, sh);
+  }
+
+  // image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
+
   photo_list_update_poll();
 
   proto_prune_poll();

@@ -3,8 +3,8 @@ function my_init() {
   // updated to verify change on mobile
   my.version = '?v=27';
   // my.moviePath = '../../moRelease/media/IMG_2772-2m33s.mov';
-  my.moviePath = '../../moRelease/media/IMG_2772-6m53s.mov';
-  my.appTitle = 'Posenet';
+  // my.moviePath = '../../moRelease/media/IMG_2772-6m53s.mov';
+  my.appTitle = 'bodyPose';
   my.isRemote = 1;
   // show detailed log
   my.logLoud = 1;
@@ -16,10 +16,10 @@ function my_init() {
   // my.fireb_config = 'jht1493';
   // my.fireb_config = 'jhtitp';
   my.dbase_rootPath = 'm0-@r-@w-';
-  my.mo_app = 'mo-posenet';
-  my.mo_room = 'm1-posenet';
+  my.mo_app = 'mo-bodypose';
+  my.mo_room = 'm1-bodypose';
   my.mo_group = 's0';
-  my.nameDevice = 'posenet';
+  my.nameDevice = 'bodypose';
 
   my.photo_index = 0;
   my.photo_max = 64;
@@ -62,7 +62,7 @@ function my_init() {
   my.qrCodeWidth = '25%';
 
   if (my.mo_group == 's0') {
-    my.mo_room = 'm0-posenet';
+    my.mo_room = 'm0-bodypose';
     my.showButtons = 1;
     my.showRemove = 1;
   }

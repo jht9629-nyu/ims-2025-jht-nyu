@@ -38,4 +38,6 @@
 
 ## wk05
 
+- [bodyPose](wk06/bodyPose)
+- [poseNet](wk06/poseNet)
 - [Slime_Molds_v1](wk06/Slime_Molds_v1)

@@ -8,9 +8,7 @@ async function setup_dbase() {
 
   observe_photo_store();
 
-  // stopLoader(); // for init
   my.waiting_for_first_mesh = 1;
-  // startLoader();
 }
 
 function observe_meta() {
