@@ -150,11 +150,12 @@ function mix_graphics(output, input) {
   let n = input.pixels.length;
   let in_r, in_g, in_b;
   let ou_r, ou_g, ou_b;
+  let thresHold = 20;
   for (let index = 0; index < n; index += 4) {
     in_r = input.pixels[index];
     in_g = input.pixels[index + 1];
     in_b = input.pixels[index + 2];
-    if (in_r > 0 && in_g > 0 && in_b > 0) {
+    if (in_r + in_g + in_b > thresHold) {
       output.pixels[index] = in_r;
       output.pixels[index + 1] = in_g;
       output.pixels[index + 2] = in_b;
