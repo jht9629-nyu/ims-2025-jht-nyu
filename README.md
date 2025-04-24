@@ -1,6 +1,6 @@
 # [github ims-2025-jht-nyu](https://github.com/jht9629-nyu/ims-2025-jht-nyu.git)
 
-# pages ?v=28
+# pages ?v=29
 
 <!-- # [pages](https://jht9629-nyu.github.io/ims-2025-jht/) ?=10 -->
 

@@ -341,3 +341,12 @@ let a_poses;
 
 // https://learn.ml5js.org/#/reference/posenet
 // https://editor.p5js.org/ml5/sketches/PoseNet_webcam
+
+// https://editor.p5js.org/ml5/sketches/hMN9GdrO3
+
+// https://docs.ml5js.org/#/reference/bodypose?id=examples
+
+// ml5.js Real-Time Body Pose Detection with Smoothing
+// https://thecodingtrain.com/tracks/ml5js-beginners-guide/ml5/7-bodypose/pose-detection
+// https://editor.p5js.org/codingtrain/sketches/9O6KbYyiX
+// Nose with lerp

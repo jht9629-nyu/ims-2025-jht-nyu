@@ -155,11 +155,15 @@ function draw_mesh() {
 
   let sw = my.video.width;
   let sh = my.video.height;
-  let aspect = sh / sw;
-  let w = width;
-  let h = width * aspect;
-  image(my.bestill.output, 0, 0, w, h, 0, 0, sw, sh);
+  let dw = width;
+  let dh = height;
+  // !!@ fit
+  // let aspect = sh / sw;
+  // let dh = width * aspect;
+  image(my.bestill.output, 0, 0, dw, dh, 0, 0, sw, sh);
 }
+
+// image(img, dx, dy, dWidth, dHeight, sx, sy, [sWidth], [sHeight], [fit], [xAlign], [yAlign])
 
 // non-black pixels from input are mixed into output
 //
