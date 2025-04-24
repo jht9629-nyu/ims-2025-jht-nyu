@@ -47,6 +47,26 @@ async function video_setup() {
 
   my.bestill = new eff_bestill({ factor: 10, input: my.bodyPose.output });
 
+  my.cycleIndex = 1;
+  // my.cycleColors = ['white', 'red', 'green', 'gold', 'black'];
+  my.cycleColors = [
+    [255, 255, 255],
+    [255, 0, 0],
+    [0, 255, 0],
+    [255, 255, 0],
+    [0, 0, 0],
+  ];
+  my.next_color = () => {
+    my.cycleIndex = (my.cycleIndex + 1) % my.cycleColors.length;
+  };
+  my.current_color = () => {
+    return my.cycleColors[my.cycleIndex];
+  };
+  my.adjacent_color = () => {
+    // exclude black
+    let index = (my.cycleIndex + 1) % (my.cycleColors.length - 1);
+    return my.cycleColors[index];
+  };
   console.log('video_setup return');
 }
 

@@ -90,7 +90,8 @@ class eff_bodyPose {
     for (let i = 0; i < n; i++) {
       let pose = poses[i];
 
-      let cols = dot_colors[i % dot_colors.length];
+      let cols = my.adjacent_color();
+      // let cols = dot_colors[i % dot_colors.length];
       let colf;
       if (this.figure_color) {
         let x1 = pose.nose.x;

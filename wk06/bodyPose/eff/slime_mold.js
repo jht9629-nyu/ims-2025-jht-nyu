@@ -29,8 +29,8 @@ class eff_slime_mold {
     this.layer.background(0);
     // this.layer.clear();
 
-    this.cycleIndex = 1;
-    this.cycleColors = ['white', 'red', 'green', 'gold', 'black'];
+    // this.cycleIndex = 1;
+    // this.cycleColors = ['white', 'red', 'green', 'gold', 'black'];
   }
 
   prepareOutput() {
@@ -48,7 +48,8 @@ class eff_slime_mold {
     }
 
     if (this.wrapX && this.wrapY) {
-      this.cycleIndex = (this.cycleIndex + 1) % this.cycleColors.length;
+      my.next_color();
+      // this.cycleIndex = (this.cycleIndex + 1) % this.cycleColors.length;
       this.init_molds();
     }
   }
@@ -162,7 +163,9 @@ class Mold {
   display() {
     let { parent, layer } = this;
     layer.noStroke();
-    let clr = parent.cycleColors[parent.cycleIndex];
+    let clr = my.current_color();
+    // let clr = my.cycleColors[my.cycleIndex];
+    // let clr = parent.cycleColors[parent.cycleIndex];
     // console.log('clr', clr);
     // console.log('parent', parent, parent.cycleColors, parent.cycleIndex, clr);
     layer.fill(clr);
