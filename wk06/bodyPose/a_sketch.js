@@ -49,11 +49,13 @@ async function video_setup() {
 
   my.cycleIndex = 1;
   // my.cycleColors = ['white', 'red', 'green', 'gold', 'black'];
+  // from: projects/_2025/let-america-be/src/js/a-main.js
+  // my.overlayColors = ['rgba(255, 80, 80, 0.25)', 'rgba(60, 190, 70, 0.5)', 'rgba(255, 180, 60, 0.5)'];
   my.cycleColors = [
     [255, 255, 255],
-    [255, 0, 0],
-    [0, 255, 0],
-    [255, 255, 0],
+    [255, 80, 80],
+    [60, 190, 70],
+    [255, 180, 60],
     [0, 0, 0],
   ];
   my.next_color = () => {
