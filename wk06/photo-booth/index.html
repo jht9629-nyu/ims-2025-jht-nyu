@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script> -->
+
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <style></style>
+  </head>
+  <body>
+    <main></main>
+
+    <!-- moLib: uncomment to test out pre-publish library   -->
+    <!-- <script type="importmap">
+      {
+        "imports": {
+          "firebase/app": "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js",
+          "firebase/auth": "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js",
+          "firebase/database": "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js",
+          "firebase/storage": "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js"
+        }
+      }
+    </script>
+    <script type="module" src="../../moLib/src/lib/a_lib.js"></script> -->
+    <!-- moLib: entry point of pre-publish library --  ] -->
+
+    <script type="module" src="https://unpkg.com/itp-molib@0.2.44/dist/moLib.esm.js?v=31"></script>
+
+    <script src="a_my_setup.js?v=31"></script>
+    <script src="create_ui.js?v=31"></script>
+    <script src="photo.js?v=31"></script>
+    <script src="setup_dbase.js?v=31"></script>
+    <script src="a_sketch.js?v=31"></script>
+    <!-- ?v=31 included to force into the cache -->
+  </body>
+</html>

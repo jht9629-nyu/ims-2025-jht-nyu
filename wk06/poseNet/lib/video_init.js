@@ -32,7 +32,7 @@ async function video_init_capture() {
 
   console.log('video_init_capture my.video.width, my.video.height', my.video.width, my.video.height);
 
-  video_init_mask();
+  // video_init_mask();
 }
 
 function video_init_mask() {

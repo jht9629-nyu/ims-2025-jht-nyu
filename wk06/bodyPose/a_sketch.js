@@ -41,10 +41,19 @@ async function video_setup() {
 
   my.input = my.video;
 
+  if (my.slime_mold) {
+    my.slime_mold.output.remove();
+  }
   my.slime_mold = slime_mold_init();
 
+  if (my.bodyPose) {
+    my.bodyPose.output.remove();
+  }
   my.bodyPose = bodyPose_init();
 
+  if (my.bestill) {
+    my.bestill.output.remove();
+  }
   my.bestill = new eff_bestill({ factor: 10, input: my.bodyPose.output });
 
   my.cycleIndex = 1;
@@ -285,6 +294,12 @@ function add_action_block(delay) {
 function add_action_unblock() {
   console.log('add_action_unblock add_action_timeoutid', my.add_action_timeoutid);
   my.add_action_timeoutid = 0;
+}
+
+function windowResized() {
+  console.log('windowResized');
+  resizeCanvas(windowWidth, windowHeight);
+  video_setup();
 }
 
 // https://editor.p5js.org/ml5/sketches/lCurUW1TT
