@@ -36,8 +36,10 @@
 - [lib_videoKit_simplex](wk05/lib_videoKit_simplex)
 - [omi-transience](wk05/omi-transience)
 
-## wk05
+## wk06
 
 - [bodyPose](wk06/bodyPose)
+- [comments](wk06/comments)
+- [photo-booth](wk06/photo-booth)
 - [poseNet](wk06/poseNet)
 - [Slime_Molds_v1](wk06/Slime_Molds_v1)
