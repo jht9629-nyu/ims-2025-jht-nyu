@@ -32,7 +32,7 @@ async function photo_list_display() {
   // console.log('photo_list_display my.photo_list', my.photo_list);
   for (let entry of my.photo_list) {
     if (!entry.uploadedAt) {
-      console.log('photo_list_display skipping item', entry);
+      // console.log('photo_list_display skipping item', entry);
       continue;
     }
     try {
@@ -47,10 +47,6 @@ async function photo_list_display() {
     let img = find_img(key);
     img.elt.src = url;
   }
-}
-
-function photo_index_increment() {
-  my.dbase.update_item('item', { photo_index: my.dbase.increment(1) });
 }
 
 function photo_store_changed_poll() {

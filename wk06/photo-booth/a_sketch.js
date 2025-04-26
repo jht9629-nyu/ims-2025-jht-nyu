@@ -186,14 +186,6 @@ function windowResized() {
   // console.log('windowResized width', width, 'height', height);
 }
 
-function ui_log(...args) {
-  console.log(...args);
-}
-
-function ui_verbose(...args) {
-  // console.log(...args);
-}
-
 // https://editor.p5js.org/jht9629-nyu/sketches/twgS6eWRZ
 // pixel-grid
 

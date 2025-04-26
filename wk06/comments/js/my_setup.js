@@ -1,14 +1,12 @@
 //
 
+// Adjust to your own firebase config settings
+// from Firebase console Web App settings
+// https://console.firebase.google.com/project/molab-485f5
+
 function my_setup() {
   my.version = '?v=31';
   // console.log('my_setup ');
-  my.fireb_config = 'jht9629';
-  // my.fireb_config = 'jhtitp';
-  my.mo_app = my.mo_app || 'mo-comments';
-  my.mo_room = my.mo_room || 'm1-comments';
-  my.mo_group = my.mo_group || 's0';
-  my.appTitle = 'comments';
 
   // set group for all devices to share item values
   let params = get_url_params();
