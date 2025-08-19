@@ -4,6 +4,10 @@
 
 <!-- # [pages](https://jht9629-nyu.github.io/ims-2025-jht/) ?=10 -->
 
+## wip
+
+- [truchet_tiles_pause_v3](wip/truchet_tiles_pause_v3)
+
 ## wk01-noise
 
 - [ims_noise_inst](wk01-noise/ims_noise_inst)
